@@ -1,0 +1,63 @@
+﻿Kode Produk,Nama Produk,Variasi,Diharapkan,Terhitung
+OLN-001,Daging Rendang 500 gr,, - , - 
+OLN-002,Daging Rendang 800 gr,, - , - 
+OLN-003,Daging Giling  500 gr,, 11 , 11 
+OLN-004,Daging Giling  1 kg,, 5 , 5 
+OLN-005,Daging Slice  300 gr,, - , - 
+OLN-006,Daging Slice  500 gr,, - , - 
+OLN-007,Rib Eye Steak 200 gr,, - , - 
+OLN-008,Rib Eye Steak 400 gr,, - , - 
+OLN-009,Striploin Steak 200 gr,, 11 , 11 
+OLN-010,Striploin Steak 400 gr,, 12 , 12 
+OLN-011,Iga Sapi Bakar / Konro  500 gr,, 7 , 7 
+OLN-012,Iga Sapi Bakar / Konro  1 kg,, 10 , 10 
+OLN-013,Tulang Sapi Sop  500 gr,, - , - 
+OLN-014,Tulang Sapi Soup  1 kg,, - , - 
+OLN-015,Daging Rawon / Tumis  500 gr,, 10 , 10 
+OLN-016,Daging Rawon / Tumis  1 kg,, 8 , 8 
+OLN-017,Buntut Sapi / Oxtail Cut  500 gr,, - , - 
+OLN-018,Buntut Sapi / Oxtail Cut  1 kg,, - , - 
+OLN-023,Daging Rendang 1 kg Shank,, - , - 
+OLN-025,Oxtail Super 1 kg,, - , - 
+OLN-027,Saikoro Beef 1 kg,, - , - 
+OLN-028,Iga Sapi Soup 500 gr,, - , - 
+OLN-029,Iga Soup 1 kg,, - , - 
+OLN-030,Iga Galbi BBQ 500 gr,, - , - 
+OLN-031,Iga Galbi BBQ 1 kg,, - , - 
+OLN-032,Oxtail Super 500 gr,, 1 , 1 
+OLN-034,Saikoro Beef 500 gr,, - , - 
+OLN-0290,Tenderloin Cube 300 gr,, 11 , 11 
+OLN-0291,Tenderloin Cube 600 gr,, - , - 
+OLN-0390,Tulang SumSum 500 gr,, - , - 
+OLN-0391,Tulang SumSum 1000 gr,, - , - 
+PL1,Paket Lebaran Blade,, 1 , 1 
+PL2,Paket Lebaran Bulkpack,, - , - 
+PL3,Paket Lebaran Topside,, - , - 
+PL4,Paket Lebaran Knuckle,, - , - 
+PL5,Paket Lebaran Liver,, 2 , 2 
+WMS-001,WMeat Aus Beef Daging Rendang 500 gr,, 10 , 10 
+WMS-002,WMeat Aus Beef Daging Rendang 1 kg,, - , - 
+WMS-003,WMeat Aus Beef Sukiyaki Slice 500 gr,, 14 , 14 
+WMS-004,WMeat Aus Beef Sukiyaki Slice 1 kg,, 11 , 11 
+WMS-005,WMeat Aus Beef Yakiniku/Teriyaki Slice 500 gr,, 1 , 1 
+WMS-006,WMeat Aus Beef Yakiniku/Teriyaki Slice 1 kg,, 5 , 5 
+WMS-011,WMeat Aus Beef Tulang Sop 500 gr,,-1 ,-1 
+WMS-012,WMeat Aus Beef Tulang Sop 1 kg,, 3 , 3 
+WMS-013,WMeat Aus Beef All Variant (Tumis/Sop) 500 gr,, - , - 
+WMS-014,WMeat Aus Beef All Variant (Tumis/Sop) 1 kg,, - , - 
+WMS-015,WMeat Aus Beef All Variant Less Fat 500 gr,, 2 , 2 
+WMS-016,WMeat Aus Beef All Variant Less Fat 1 kg,, 3 , 3 
+WMS-017,WMeat Aus Beef Rib Eye Steak 200 gr,, 12 , 12 
+WMS-018,WMeat Aus Beef Rib Eye Steak 400 gr,, 11 , 11 
+WMS-019,WMeat Aus Beef Striploin Steak 200 gr,, - , - 
+WMS-020,WMeat Aus Beef Striploin Steak 400 gr,, - , - 
+WMS-021,WMeat Aus Beef Oxtail Cut 500 gr,, 10 , 10 
+WMS-022,WMeat Aus Beef Oxtail Cut 1 kg,, 14 , 14 
+WMS-023,WMeat Aus Beef Daging Giling 500 gr,, 1 , 1 
+WMS-024,WMeat Aus Beef Daging Giling 1 kg,, 4 , 4 
+WMS-025,WMeat Aus Beef Iga sop Super 500 gr,, 6 , 6 
+WMS-026,WMeat Aus Beef Iga sop Super 1 kg,, 9 , 9 
+WMS-027,WMeat Aus Beef Bone In Sirloin 250 gr,, 17 , 17 
+WMS-028,WMeat Aus Beef Lidah Sapi Slice 500 gr,, 1 , 1 
+WMS-029,WMeat Aus Beef Lidah Sapi Slice 250 gr,, 16 , 16 
+WMS-030,Wmeat Aus Beef Iga Galbi 500 gr,, 10 , 10 

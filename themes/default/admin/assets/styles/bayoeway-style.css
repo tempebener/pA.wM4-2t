@@ -1,0 +1,191 @@
+/*!
+ *   Custom Styling (css)
+ *   Author: Bayoeway
+ */
+/*
+ * Core: AdminLTE v2.4.5
+ * -------------------------
+ */
+
+/*Login*/
+.login-page .card-login .logo-container {
+  width: 100px !important;
+  margin-bottom: unset;
+}
+.login-page .card-login .input-group:last-child {
+  margin-bottom: unset;
+}
+
+/*Loading*/
+#loading2{
+  background: url("../images/rocket.gif") no-repeat scroll 50% 10% #FFF;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999999;
+  animation: mymove 50s 1;
+  animation-delay: 50s;
+}
+
+/*Navbar*/
+.navbar {
+  background: unset;
+}
+.btn-visible-sm .btn {
+  color: unset;
+}
+
+/*Sidebar*/
+.nav.main-menu > li > a, .nav.main-menu > li > ul > li > a, .nav.main-menu > li > ul > li > ul > li > a, .nav.main-menu > li > ul > li > ul > li > ul > li > a {
+  background: unset;
+}
+#sidebar-left {
+  background-color: #0c213a;
+}
+.lt td.sidebar-con {
+  background-color: #0c213a;
+  padding: 20px 10px 0;
+}
+.nav.main-menu > li.active > a, #sidebar-left.minified .sidebar-nav > ul > li.active > a .text {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+  border-radius: .50rem;
+}
+.nav.main-menu > li.active > a > i, .nav.main-menu > li > ul > li.active > a > i, .nav.main-menu > li > ul > li > ul > li.active > a > i, .nav.main-menu > li > ul > li > ul > li > ul > li.active > a > i {
+  color: #bc2030;
+}
+.nav.main-menu > li.active > a:hover {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+  cursor: default;
+}
+.nav.main-menu > li > a:hover, .nav.main-menu > li > ul > li > a:hover {
+  background: #007bff;
+  border-radius: .50rem;
+}
+a#main-menu-act {
+  border-bottom: 1px solid white;
+}
+a#main-menu-act i {
+  bottom: -15px;
+  width: 30px;
+  height: 30px;
+  background: white;
+  padding: 8px 0px;
+  color: black;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  left: -5px;
+  right: 0;
+  text-align: center;
+}
+.header-nav a.btn .user{
+  color: black !important;
+}
+.header-nav a.btn:hover .user{
+  color: white !important;
+}
+
+/*Submenu Sidebar*/
+.nav.main-menu > li > ul > li.active > a, .nav.main-menu > li > ul > li > ul > li.active > a, .nav.main-menu > li > ul > li > ul > li > ul > li.active > a {
+  background: white;
+  color: #bc2030;
+  border-color: white;
+  border-radius: .50rem;
+  border-bottom: unset;
+}
+.nav.main-menu > li > ul > li > a, .nav.main-menu > li > ul > li > ul > li > a, .nav.main-menu > li > ul > li > ul > li > ul > li > a {
+  border-bottom: unset;
+}
+.nav.main-menu > li > ul > li > a:hover, .nav.main-menu > li > ul > li > ul > li > a:hover, .nav.main-menu > li > ul > li > ul > li > ul > li > a:hover {
+  background-color: rgba(255,255,255,.1);
+  color: #fff;
+  border-radius: .50rem;
+  border-bottom: unset;
+}
+.nav.main-menu > li > ul > li.active > a:hover, .nav.main-menu > li > ul > li > ul > li.active > a:hover, .nav.main-menu > li > ul > li > ul > li > ul > li.active > a:hover {
+  background: white;
+  color: #bc2030;
+  border-color: white;
+  border-radius: .50rem;
+}
+a.navbar-brand {
+  width: 250px;
+  white-space: nowrap;
+}
+a.navbar-brand span {
+  color: black;
+  text-shadow: none;
+  text-align: center;
+  display: block;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+
+
+
+/*Collapse Sidebar*/
+#content.sidebar-minified {
+  /*border-left: 40px solid #bc2030;*/
+  /*border-left: 40px solid #0c213a;*/
+}
+.nav.main-menu > li.active > a > i, .nav.main-menu > li > ul > li.active > a > i, .nav.main-menu > li > ul > li > ul > li.active > a > i, .nav.main-menu > li > ul > li > ul > li > ul > li.active > a > i {
+  color: unset;
+}
+#sidebar-left.minified .sidebar-nav > ul > li:hover > ul {
+  background: #82000d;
+}
+#sidebar-left.minified .sidebar-nav > ul > li:hover > a .text {
+  background: #007bff;
+}
+
+/*Table*/
+.table > thead:first-child > tr:first-child > th, .table > thead:first-child > tr:first-child > td, .table-striped thead tr.primary:nth-child(2n+1) th {
+  /*background-color: #0073cf;*/
+  background-color: #007bff;
+}
+
+/*Text*/
+.blue {
+  color: #007bff !important;
+}
+
+/*Button*/
+.navbar-nav > li > a, .navbar-nav > a {
+  border-radius: 5px !important;
+}
+.bblue {
+  background: #007bff !important;
+}
+.btn-primary {
+  background-color: #007bff;
+}
+
+img{
+  image-rendering: -webkit-optimize-contrast;
+}
+
+
+@media (max-width: 767px) {
+  .lt td.sidebar-con {
+    padding: unset;
+  }
+}
+/*Draft*/
+@media (max-width: 767px) {
+  .unset-mobile {
+    display: none;
+    width: unset;
+    float: unset;
+  }
+  .width-100{
+    width: 100%;
+    float: unset;
+  }
+}
