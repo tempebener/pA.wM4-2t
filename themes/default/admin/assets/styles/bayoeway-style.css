@@ -12,8 +12,14 @@
   width: 100px !important;
   margin-bottom: unset;
 }
+.login-page .card-login .logo-container img {
+  border-radius: 50%;
+}
 .login-page .card-login .input-group:last-child {
   margin-bottom: unset;
+}
+.login .input-group.no-border.input-lg .input-group-text {
+  padding: 15px 15px 15px 19px;
 }
 
 /*Loading*/

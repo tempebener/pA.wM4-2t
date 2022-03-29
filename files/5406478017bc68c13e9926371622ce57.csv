@@ -1,0 +1,25 @@
+Name,Code,Barcode Symbology,Brand,Category Code,Unit Code,Sale Unit Code, Purchase Unit Code,Cost,Price,Alert Quantity, Tax Rate Name,Tax Method,Image,Subcategory Code,Product Variants Separated by |,Custom Field 1,Custom Field 2,Custom Field 3,Custom Field 4,Custom Field 5,Custom Field 6,HSN Code,Secondary Name,Supplier Name,Supplier Part No,Supplier Price
+W99 Karkas 0.4 Kg,WK004,code128,W99, KK001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,17500
+W99 Karkas 0.5 Kg,WK005,code128,W99, KK001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,20500
+W99 Karkas 0.6 Kg,WK006,code128,W99, KK001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,23800
+W99 Karkas 0.7 Kg,WK007,code128,W99, KK001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,25300
+W99 Karkas 0.8 Kg,WK008,code128,W99, KK001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,27200
+W99 Karkas 0.9 Kg,WK009,code128,W99, KK001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,30100
+W99 Karkas 1.0 Kg,WK010,code128,W99, KK001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,31500
+W99 Karkas 1.1 Kg,WK011,code128,W99, KK001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,33600
+W99 Karkas 1.2 Kg,WK012,code128,W99, KK001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,36300
+W99 Karkas 1.3 Kg,WK013,code128,W99, KK001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,38200
+W99 Boneless Dada 1.0 Kg,BD1,code128,W99,BO001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,43500
+W99 Boneless Dada 1.0 Kg Premium,BD1P,code128,W99,BO001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,44500
+W99 Boneless Paha 1.0 Kg,BP1,code128,W99,BO001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,41500
+W99 Boneless Paha 1.0 Kg Premium,BP1P,code128,W99,BO001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,42500
+W99 Kulit 1.0 Kg,KL1,code128,W99,BO001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,32500
+W99 Kulit 1.0 Kg Premium,KL1P,code128,W99,BO001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,33500
+W99 Paha Atas 1.0 Kg,PA1,code128,W99, P0001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,36900
+W99 Paha Atas 1.0 Kg Premium,PA1P,code128,W99, P0001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,37900
+W99 Paha Bawah 1.0 Kg,PB1,code128,W99, P0001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,36900
+W99 Paha Bawah 1.0 Kg Premium,PB1P,code128,W99, P0001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,37900
+W99 Sayap Utuh 1.0 Kg,SU1,code128,W99, P0001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,36900
+W99 Sayap Utuh 1.0 Kg Premium,SU1P,code128,W99, P0001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,37900
+W99 Ayam  Parting 10 Ukuran 1.0 Kg,AP1,code128,W99, P0001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,35100
+W99 Ayam  Parting 10 Ukuran 1.0 Kg Premium,AP1P,code128,W99, P0001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,36100

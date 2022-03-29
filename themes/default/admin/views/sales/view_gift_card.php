@@ -34,14 +34,14 @@
                     <div class="card-content white-text">
                         <svg xmlns="http://www.w3.org/2000/svg" width="353px" height="206px" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <text x="5"  y="20" style="font-size:16;fill:#FFF;">
-                                <?= lang('gift_card'); ?>
+                                Member
                             </text>
                             <text x="175"  y="20" style="font-size:16;fill:#FFF;">
                                 <?= wordwrap($gift_card->card_no, 4, ' ', true); ?>
                             </text>
-                            <text x="5"  y="75" style="font-size:36;fill:#FFF;">
+                            <!-- <text x="5"  y="75" style="font-size:36;fill:#FFF;">
                                 <?= $Settings->default_currency . ' ' . $this->sma->formatMoney($gift_card->value); ?>
-                            </text>
+                            </text> -->
                             <text x="5"  y="98" style="font-size:14;fill:#FFF;">
                                 <?= $customer ? ($customer->company && $customer->company != '-' ? $customer->company : $customer->name) : ''; ?>
                             </text>

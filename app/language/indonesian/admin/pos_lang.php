@@ -25,7 +25,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 
 // For quick cash buttons -  if you need to format the currency please do it according to you system settings
-$lang['quick_cash_notes'] = ['500', '1000', '2000', '5000', '10000', '20000', '50000'];
+$lang['quick_cash_notes'] = ['100','200','500', '1000', '2000', '5000', '10000', '20000', '50000', '100000', '200000'];
 
 $lang['pos_module']                         = 'Modul POS';
 $lang['cat_limit']                          = 'Tampilkan Kategori';
@@ -214,6 +214,7 @@ $lang['suspend_sale']                       = 'Penangguhan Penjualan';
 $lang['reference_note']                     = 'Catatan Referensi';
 $lang['type_reference_note']                = 'Silakan ketik catatan referensi dan kirimkan untuk menangguhkan penjualan ini';
 $lang['change']                             = 'Ubah';
+$lang['change_bill']                        = 'Kembali';
 $lang['quick_cash']                         = 'Quick Cash';
 $lang['sales_person']                       = 'Kasir';
 $lang['no_opeded_bill']                     = 'Tidak ditemukan tagihan yang dibuka';

@@ -31,6 +31,24 @@
                 .border-bottom { border-bottom: 1px solid #ddd !important; }
                 table tfoot { display: table-row-group; }
             }
+            /*Add by Bayu*/
+            #receiptData{
+                font-size: 10px;
+            }
+            .border-dash{
+                border-bottom: 2px dashed;
+            }
+            .grand-total{
+                font-size: small;
+                letter-spacing: 1px;
+            }
+            .no-topbot-border{
+                padding: 0 !important;
+            }
+            .no-botom-border{
+                padding: 0 0 2px !important;
+            }
+}
         </style>
     </head>
 
@@ -107,7 +125,7 @@
                     }
                 }
                 echo lang('sales_person') . ': ' . $created_by->first_name . ' ' . $created_by->last_name . '</p>';
-                echo '<p>';
+                echo '<p class="border-dash">';
                 echo lang('customer') . ': ' . ($customer->company && $customer->company != '-' ? $customer->company : $customer->name) . '<br>';
                 
                 echo '</p>';
@@ -115,7 +133,7 @@
 
                 <div style="clear:both;"></div>
                 <table class="table table-condensed">
-                    <tbody>
+                    <tbody class="border-dash">
                         <?php
                         $r           = 1; $category           = 0;
                         $tax_summary = [];
@@ -124,23 +142,23 @@
                                 $category = $row->category_id;
                                 echo '<tr><td colspan="100%" class="no-border"><strong>' . $row->category_name . '</strong></td></tr>';
                             }
-                            echo '<tr><td colspan="2" class="no-border">#' . $r . ': &nbsp;&nbsp;' . product_name($row->product_name, ($printer ? $printer->char_per_line : null)) . ($row->variant ? ' (' . $row->variant . ')' : '') . '<span class="pull-right">' . ($row->tax_code ? '*' . $row->tax_code : '') . '</span></td></tr>';
+                            echo '<tr><td colspan="2" class="no-border no-topbot-border">#' . $r . ': &nbsp;&nbsp;' . product_name($row->product_name, ($printer ? $printer->char_per_line : null)) . ($row->variant ? ' (' . $row->variant . ')' : '') . '<span class="pull-right">' . ($row->tax_code ? '*' . $row->tax_code : '') . '</span></td></tr>';
                             if (!empty($row->second_name)) {
-                                echo '<tr><td colspan="2" class="no-border">' . $row->second_name . '</td></tr>';
+                                echo '<tr><td colspan="2" class="no-border no-topbot-border">' . $row->second_name . '</td></tr>';
                             }
-                            echo '<tr><td class="no-border border-bottom">' . $this->sma->formatQuantity($row->unit_quantity) . ' x ' . $this->sma->formatMoney($row->unit_price) . ($row->item_tax != 0 ? ' - ' . lang('tax') . ' <small>(' . ($Settings->indian_gst ? $row->tax : $row->tax_code) . ')</small> ' . $this->sma->formatMoney($row->item_tax) . ($row->hsn_code ? ' (' . lang('hsn_code') . ': ' . $row->hsn_code . ')' : '') : '') . '</td><td class="no-border border-bottom text-right">' . $this->sma->formatMoney($row->subtotal) . '</td></tr>';
+                            echo '<tr><td class="no-border no-botom-border">' . $this->sma->formatQuantity($row->unit_quantity) . ' x ' . $this->sma->formatMoney($row->unit_price) . ($row->item_tax != 0 ? ' - ' . lang('tax') . ' <small>(' . ($Settings->indian_gst ? $row->tax : $row->tax_code) . ')</small> ' . $this->sma->formatMoney($row->item_tax) . ($row->hsn_code ? ' (' . lang('hsn_code') . ': ' . $row->hsn_code . ')' : '') : '') . '</td><td class="no-border text-right">' . $this->sma->formatMoney($row->subtotal) . '</td></tr>';
 
                             $r++;
                         }
                         if ($return_rows) {
-                            echo '<tr class="warning"><td colspan="100%" class="no-border"><strong>' . lang('returned_items') . '</strong></td></tr>';
+                            echo '<tr class="warning border-dash"><td colspan="100%" class="no-border"><strong>' . lang('returned_items') . '</strong></td></tr>';
                             foreach ($return_rows as $row) {
                                 if ($pos_settings->item_order == 1 && $category != $row->category_id) {
                                     $category = $row->category_id;
                                     echo '<tr><td colspan="100%" class="no-border"><strong>' . $row->category_name . '</strong></td></tr>';
                                 }
-                                echo '<tr><td colspan="2" class="no-border">#' . $r . ': &nbsp;&nbsp;' . product_name($row->product_name, ($printer ? $printer->char_per_line : null)) . ($row->variant ? ' (' . $row->variant . ')' : '') . '<span class="pull-right">' . ($row->tax_code ? '*' . $row->tax_code : '') . '</span></td></tr>';
-                                echo '<tr><td class="no-border border-bottom">' . $this->sma->formatQuantity($row->unit_quantity) . ' x ' . $this->sma->formatMoney($row->unit_price) . ($row->item_tax != 0 ? ' - ' . lang('tax') . ' <small>(' . ($Settings->indian_gst ? $row->tax : $row->tax_code) . ')</small> ' . $this->sma->formatMoney($row->item_tax) . ($row->hsn_code ? ' (' . lang('hsn_code') . ': ' . $row->hsn_code . ')' : '') : '') . '</td><td class="no-border border-bottom text-right">' . $this->sma->formatMoney($row->subtotal) . '</td></tr>';
+                                echo '<tr><td colspan="2" class="no-border no-topbot-border">#' . $r . ': &nbsp;&nbsp;' . product_name($row->product_name, ($printer ? $printer->char_per_line : null)) . ($row->variant ? ' (' . $row->variant . ')' : '') . '<span class="pull-right">' . ($row->tax_code ? '*' . $row->tax_code : '') . '</span></td></tr>';
+                                echo '<tr><td class="no-border no-bot-border">' . $this->sma->formatQuantity($row->unit_quantity) . ' x ' . $this->sma->formatMoney($row->unit_price) . ($row->item_tax != 0 ? ' - ' . lang('tax') . ' <small>(' . ($Settings->indian_gst ? $row->tax : $row->tax_code) . ')</small> ' . $this->sma->formatMoney($row->item_tax) . ($row->hsn_code ? ' (' . lang('hsn_code') . ': ' . $row->hsn_code . ')' : '') : '') . '</td><td class="no-border text-right"><large>' . $this->sma->formatMoney($row->subtotal) . '</large></td></tr>';
 
                                 // echo '<tr><td class="no-border border-bottom">' . $this->sma->formatQuantity($row->quantity) . ' x ';
                                 // if ($row->item_discount != 0) {
@@ -198,15 +216,15 @@
                                 <th class="text-right"><?= $this->sma->formatMoney($inv->rounding); ?></th>
                             </tr> -->
                             <tr>
-                                <th><?=lang('grand_total'); ?></th>
-                                <th class="text-right"><?=$this->sma->formatMoney($return_sale ? (($inv->grand_total + $inv->rounding) + $return_sale->grand_total) : ($inv->grand_total + $inv->rounding)); ?></th>
+                                <th class="grand-total"><?=lang('grand_total'); ?></th>
+                                <th class="text-right grand-total"><?=$this->sma->formatMoney($return_sale ? (($inv->grand_total + $inv->rounding) + $return_sale->grand_total) : ($inv->grand_total + $inv->rounding)); ?></th>
                             </tr>
                             <?php
                         } else {
                             ?>
                             <tr>
-                                <th><?=lang('grand_total'); ?></th>
-                                <th class="text-right"><?=$this->sma->formatMoney($return_sale ? ($inv->grand_total + $return_sale->grand_total) : $inv->grand_total); ?></th>
+                                <th class="grand-total"><?=lang('grand_total'); ?></th>
+                                <th class="text-right grand-total"><?=$this->sma->formatMoney($return_sale ? ($inv->grand_total + $return_sale->grand_total) : $inv->grand_total); ?></th>
                             </tr>
                             <?php
                         }
@@ -227,31 +245,71 @@
                 </table>
                 <?php
                 if ($payments) {
-                    echo '<table class="table table-striped table-condensed"><tbody>';
+                    echo '<table class="table table-striped table-condensed"><tbody class="border-dash">';
                     foreach ($payments as $payment) {
                         echo '<tr>';
                         if (($payment->paid_by == 'cash' || $payment->paid_by == 'deposit') && $payment->pos_paid) {
-                            echo '<td>' . lang('paid_by') . ': ' . lang($payment->paid_by) . '</td>';
-                            echo '<td colspan="2">' . lang('amount') . ': ' . $this->sma->formatMoney($payment->pos_paid == 0 ? $payment->amount : $payment->pos_paid) . ($payment->return_id ? ' (' . lang('returned') . ')' : '') . '</td>';
-                            echo '<td>' . lang('change') . ': ' . ($payment->pos_balance > 0 ? $this->sma->formatMoney($payment->pos_balance) : 0) . '</td>';
+                            echo '<td>' . lang('paid_by') . ':</td>';
+                            echo '<td class="text-right">' . lang($payment->paid_by) . '</td>';
+                        echo '</tr>';
+                        echo '<tr>';
+                            echo '<td>' . lang('amount') . ': </td>';
+                            echo '<td class="text-right">' . $this->sma->formatMoney($payment->pos_paid == 0 ? $payment->amount : $payment->pos_paid) . ($payment->return_id ? ' (' . lang('returned') . ')' : '') . '</td>';
+                        echo '</tr>';
+                        echo '<tr>';
+                            echo '<td>' . lang('change_bill') . ': </td>';
+                            echo '<td class="text-right">' . ($payment->pos_balance > 0 ? $this->sma->formatMoney($payment->pos_balance) : 0) . '</td>';
                         } elseif (($payment->paid_by == 'CC' || $payment->paid_by == 'ppp' || $payment->paid_by == 'stripe') && $payment->cc_no) {
-                            echo '<td>' . lang('paid_by') . ': ' . lang($payment->paid_by) . '</td>';
-                            echo '<td>' . lang('amount') . ': ' . $this->sma->formatMoney($payment->pos_paid) . ($payment->return_id ? ' (' . lang('returned') . ')' : '') . '</td>';
-                            echo '<td>' . lang('no') . ': ' . 'xxxx xxxx xxxx ' . substr($payment->cc_no, -4) . '</td>';
-                            echo '<td>' . lang('name') . ': ' . $payment->cc_holder . '</td>';
+                            echo '<td>' . lang('paid_by') . ': </td>';
+                            echo '<td class="text-right">' . lang($payment->paid_by) . '</td>';
+                        echo '</tr>';
+                        echo '<tr>';
+                            echo '<td>' . lang('amount') . ': </td>';
+                            echo '<td class="text-right">' . $this->sma->formatMoney($payment->pos_paid) . ($payment->return_id ? ' (' . lang('returned') . ')' : '') . '</td>';
+                        echo '</tr>';
+                        echo '<tr>';
+                            echo '<td>' . lang('no') . ': </td>';
+                            echo '<td class="text-right">' . 'xxxx xxxx xxxx ' . substr($payment->cc_no, -4) . '</td>';
+                        echo '</tr>';
+                        echo '<tr>';
+                            echo '<td>' . lang('name') . ': </td>';
+                            echo '<td class="text-right">' . $payment->cc_holder . '</td>';
                         } elseif ($payment->paid_by == 'Cheque' && $payment->cheque_no) {
-                            echo '<td>' . lang('paid_by') . ': ' . lang($payment->paid_by) . '</td>';
-                            echo '<td colspan="2">' . lang('amount') . ': ' . $this->sma->formatMoney($payment->pos_paid) . ($payment->return_id ? ' (' . lang('returned') . ')' : '') . '</td>';
-                            echo '<td>' . lang('cheque_no') . ': ' . $payment->cheque_no . '</td>';
+                            echo '<td>' . lang('paid_by') . ': </td>';
+                            echo '<td class="text-right">' . lang($payment->paid_by) . '</td>';
+                        echo '</tr>';
+                        echo '<tr>';
+                            echo '<td>' . lang('amount') . ': </td>';
+                            echo '<td class="text-right">' . $this->sma->formatMoney($payment->pos_paid) . ($payment->return_id ? ' (' . lang('returned') . ')' : '') . '</td>';
+                        echo '</tr>';
+                        echo '<tr>';
+                            echo '<td>' . lang('cheque_no') . ': </td>';
+                            echo '<td class="text-right">' . $payment->cheque_no . '</td>';
                         } elseif ($payment->paid_by == 'gift_card' && $payment->pos_paid) {
-                            echo '<td>' . lang('paid_by') . ': ' . lang($payment->paid_by) . '</td>';
-                            echo '<td>' . lang('no') . ': xxxx xxxx xxxx ' . substr($payment->cc_no, -4) . '</td>';
-                            echo '<td>' . lang('amount') . ': ' . $this->sma->formatMoney($payment->pos_paid) . ($payment->return_id ? ' (' . lang('returned') . ')' : '') . '</td>';
-                            echo '<td>' . lang('balance') . ': ' . $this->sma->formatMoney($this->sma->getCardBalance($payment->cc_no)) . '</td>';
+                            echo '<td>' . lang('paid_by') . ': </td>';
+                            echo '<td class="text-right">' . lang($payment->paid_by) . '</td>';
+                        echo '</tr>';
+                        echo '<tr>';
+                            echo '<td>' . lang('no') . ': </td>';
+                            echo '<td class="text-right">xxxx xxxx xxxx ' . substr($payment->cc_no, -4) . '</td>';
+                        echo '</tr>';
+                        echo '<tr>';
+                            echo '<td>' . lang('amount') . ': </td>';
+                            echo '<td class="text-right">' . $this->sma->formatMoney($payment->pos_paid) . ($payment->return_id ? ' (' . lang('returned') . ')' : '') . '</td>';
+                        echo '</tr>';
+                        echo '<tr>';
+                            echo '<td>' . lang('balance') . ': </td>';
+                            echo '<td class="text-right">' . $this->sma->formatMoney($this->sma->getCardBalance($payment->cc_no)) . '</td>';
                         } elseif ($payment->paid_by == 'other' && $payment->amount) {
-                            echo '<td colspan="2">' . lang('paid_by') . ': ' . lang($payment->paid_by) . '</td>';
-                            echo '<td colspan="2">' . lang('amount') . ': ' . $this->sma->formatMoney($payment->pos_paid == 0 ? $payment->amount : $payment->pos_paid) . ($payment->return_id ? ' (' . lang('returned') . ')' : '') . '</td>';
-                            echo $payment->note ? '</tr><td colspan="4">' . lang('payment_note') . ': ' . $payment->note . '</td>' : '';
+                            echo '<td>' . lang('paid_by') . ': </td>';
+                            echo '<td class="text-right">' . lang($payment->paid_by) . '</td>';
+                        echo '</tr>';
+                        echo '<tr>';
+                            echo '<td>' . lang('amount') . ': </td>';
+                            echo '<td class="text-right">' . $this->sma->formatMoney($payment->pos_paid == 0 ? $payment->amount : $payment->pos_paid) . ($payment->return_id ? ' (' . lang('returned') . ')' : '') . '</td>';
+                        echo '</tr>';
+                        echo '<tr>';
+                            echo $payment->note ? '</tr><td>' . lang('payment_note') . ': ' . $payment->note . '</td>' : '';
                         }
                         echo '</tr>';
                     }
@@ -266,7 +324,7 @@
                         if (($payment->paid_by == 'cash' || $payment->paid_by == 'deposit') && $payment->pos_paid) {
                             echo '<td>' . lang('paid_by') . ': ' . lang($payment->paid_by) . '</td>';
                             echo '<td colspan="2">' . lang('amount') . ': ' . $this->sma->formatMoney($payment->pos_paid == 0 ? $payment->amount : $payment->pos_paid) . ($payment->return_id ? ' (' . lang('returned') . ')' : '') . '</td>';
-                            echo '<td>' . lang('change') . ': ' . ($payment->pos_balance > 0 ? $this->sma->formatMoney($payment->pos_balance) : 0) . '</td>';
+                            echo '<td>' . lang('change_bill') . ': ' . ($payment->pos_balance > 0 ? $this->sma->formatMoney($payment->pos_balance) : 0) . '</td>';
                         } elseif (($payment->paid_by == 'CC' || $payment->paid_by == 'ppp' || $payment->paid_by == 'stripe') && $payment->cc_no) {
                             echo '<td>' . lang('paid_by') . ': ' . lang($payment->paid_by) . '</td>';
                             echo '<td>' . lang('amount') . ': ' . $this->sma->formatMoney($payment->pos_paid) . ($payment->return_id ? ' (' . lang('returned') . ')' : '') . '</td>';

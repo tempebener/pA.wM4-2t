@@ -1,0 +1,6 @@
+Name,Code,Barcode Symbology,Brand,Category Code,Unit Code,Sale Unit Code, Purchase Unit Code,Cost,Price,Alert Quantity, Tax Rate Name,Tax Method,Image,Subcategory Code,Product Variants Separated by |,Custom Field 1,Custom Field 2,Custom Field 3,Custom Field 4,Custom Field 5,Custom Field 6,HSN Code,Secondary Name,Supplier Name,Supplier Part No,Supplier Price
+Spicy Chicken,8.99722E+12,code128,JAVA,OL0001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,21
+Sosis Royal Mini,8.99722E+12,code128,ROYAL JAVA,OL0001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,22
+Nuget Fancy 250gr,8.99722E+12,code128,JAVA,OL0001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,6.5
+Bakso Sapi Java 500gr,8.99722E+12,code128,JAVA,OL0001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,9
+Bakso Ayam Java 500gr,8.99722E+12,code128,JAVA,OL0001,Pack,Pack,Pack,0,0,10,No Tax,exclusive,no_image.png,,,,,,,,,,,Widodo Makmur Retailindo,,9

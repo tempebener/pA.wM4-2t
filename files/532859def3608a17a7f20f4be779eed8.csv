@@ -1,0 +1,31 @@
+Name;Code;Barcode Symbology;Brand;Category Code;Unit Code;Sale Unit Code; Purchase Unit Code;Cost;Price;Alert Quantity; Tax Rate Name;Tax Method;Image;Subcategory Code;Product Variants Separated by |;Custom Field 1;Custom Field 2;Custom Field 3;Custom Field 4;Custom Field 5;Custom Field 6;HSN Code;Secondary Name;Supplier Name;Supplier Part No;Supplier Price
+Wmeat Oxtail Super 500 gr;OLN-032;code128;WMEAT;B001;Pack;Pack;Pack;133000;160930;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;133000
+Wmeat Tenderloin Cube 300 gr;OLN-0290;code128;WMEAT;B001;Pack;Pack;Pack;98000;107800;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;98000
+Wmeat Aus Beef Daging Rendang 500 gr;WMS-001;code128;WMEAT;B001;Pack;Pack;Pack;88000;96800;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;88000
+Wmeat Aus Beef Daging Rendang 1000 gr;WMS-002;code128;WMEAT;B001;Pack;Pack;Pack;168000;184800;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;168000
+Wmeat Aus Beef Sukiyaki Slice 500 gr;WMS-003;code128;WMEAT;B001;Pack;Pack;Pack;90000;99000;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;90000
+Wmeat Aus Beef Sukiyaki Slice 1000 gr;WMS-004;code128;WMEAT;B001;Pack;Pack;Pack;173000;190300;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;173000
+Wmeat Aus Beef Yakiniku / Teriyaki Slice (Less Fat) 500 gr;WMS-005;code128;WMEAT;B001;Pack;Pack;Pack;88000;96800;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;88000
+Wmeat Aus Beef Yakiniku / Teriyaki Slice (Less Fat) 1000 gr;WMS-006;code128;WMEAT;B001;Pack;Pack;Pack;168000;184800;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;168000
+Wmeat Aus Beef Tulang Sop Neckbone 500 gr;WMS-011;code128;WMEAT;B001;Pack;Pack;Pack;31000;34100;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;31000
+Wmeat Aus Beef Tulang Sop Neckbone 1000 gr;WMS-012;code128;WMEAT;B001;Pack;Pack;Pack;52000;57200;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;52000
+Wmeat Aus Beef All Variant Super Less Fat 500 gr;WMS-015;code128;WMEAT;B001;Pack;Pack;Pack;58000;63800;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;58000
+Wmeat Aus Beef All Variant Super Less Fat 1000 gr;WMS-016;code128;WMEAT;B001;Pack;Pack;Pack;108000;118800;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;108000
+Wmeat Aus Beef Rib Eye Steak 200 gr;WMS-017;code128;WMEAT;B001;Pack;Pack;Pack;53000;58300;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;53000
+Wmeat Aus Beef Rib Eye Steak 400 gr;WMS-018;code128;WMEAT;B001;Pack;Pack;Pack;98000;107800;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;98000
+Wmeat Aus Beef Oxtail Cut 500 gr;WMS-021;code128;WMEAT;B001;Pack;Pack;Pack;133000;146300;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;133000
+Wmeat Aus Beef Oxtail Cut 1000 gr;WMS-022;code128;WMEAT;B001;Pack;Pack;Pack;258000;283800;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;258000
+Wmeat Aus Beef Daging Giling 500 gr;WMS-023;code128;WMEAT;B001;Pack;Pack;Pack;63000;69300;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;63000
+Wmeat Aus Beef Daging Giling 1000 gr;WMS-024;code128;WMEAT;B001;Pack;Pack;Pack;118000;129800;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;118000
+Wmeat Aus Beef Iga Sop Super (Rib Plate) 500 gr;WMS-025;code128;WMEAT;B001;Pack;Pack;Pack;51000;56100;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;51000
+Wmeat Aus Beef Iga Sop Super (Rib Plate) 1000 gr;WMS-026;code128;WMEAT;B001;Pack;Pack;Pack;93000;102300;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;93000
+Wmeat Aus Beef Bone In Sirloin Steak 250 gr;WMS-027;code128;WMEAT;B001;Pack;Pack;Pack;61000;67100;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;61000
+Wmeat Aus Beef Lidah Slice 500 gr;WMS-028;code128;WMEAT;B001;Pack;Pack;Pack;75000;82500;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;75000
+Wmeat Aus Beef Lidah Slice 250 gr;WMS-029;code128;WMEAT;B001;Pack;Pack;Pack;43000;47300;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;43000
+Wmeat Aus Beef Iga Galbi 500 gr;WMS-030;code128;WMEAT;B001;Pack;Pack;Pack;81000;89100;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;81000
+Wmeat Aus Beef Striploin Steak 200 gr;OLN-009;code128;WMEAT;B001;Pack;Pack;Pack;53000;58300;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;53000
+Wmeat Aus Beef Striploin Steak 400 gr;OLN-010;code128;WMEAT;B001;Pack;Pack;Pack;98000;107800;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;98000
+Wmeat Aus Beef Iga Bakar Back Ribs 500 gr;OLN-011;code128;WMEAT;B001;Pack;Pack;Pack;56000;61600;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;56000
+Wmeat Aus Beef Iga Bakar Back Ribs 1000 gr;OLN-012;code128;WMEAT;B001;Pack;Pack;Pack;101000;111100;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;101000
+Wmeat Aus Beef All Variant Tumis / Sop 500 gr;OLN-015;code128;WMEAT;B001;Pack;Pack;Pack;50000;55000;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;50000
+Wmeat Aus Beef All Variant Tumis / Sop 1000 gr;OLN-016;code128;WMEAT;B001;Pack;Pack;Pack;93000;102300;10;No Tax;exclusive;no_image.png;;;;;;;;;;;Widodo Makmur Retailindo;;93000
