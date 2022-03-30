@@ -25,7 +25,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 
 // For quick cash buttons -  if you need to format the currency please do it according to you system settings
-$lang['quick_cash_notes'] = ['100','200','500', '1000', '2000', '5000', '10000', '20000', '50000', '100000', '200000'];
+$lang['quick_cash_notes'] = ['500', '1000', '2000', '5000', '10000', '20000', '50000'];
 
 $lang['pos_module']                         = 'Modul POS';
 $lang['cat_limit']                          = 'Tampilkan Kategori';
@@ -38,7 +38,7 @@ $lang['barcode_scanner']                    = 'Barcode Scanner';
 $lang['x']                                  = 'X';
 $lang['qty']                                = 'Qty';
 $lang['total_items']                        = 'Total Items';
-$lang['total_payable']                      = 'Total Hutang';
+$lang['total_payable']                      = 'Total Bayar';
 $lang['total_sales']                        = 'Total Penjualan';
 $lang['tax1']                               = 'Pajak 1';
 $lang['total_x_tax']                        = 'Total';
@@ -98,10 +98,10 @@ $lang['cf_title2']                          = 'Field khusus 2 Title';
 $lang['cf_value2']                          = 'Field khusus 2 Value';
 $lang['cash']                               = 'Uang Tunai';
 $lang['cc']                                 = 'Kartu Kredit';
-$lang['cheque']                             = 'Periksa';
+$lang['cheque']                             = 'EWallet';
 $lang['cc_no']                              = 'No Kartu Kredit';
 $lang['cc_holder']                          = 'Nama Kartu Kredit';
-$lang['cheque_no']                          = 'No Kartu Kredit';
+$lang['cheque_no']                          = 'Kode Pembayaran';
 $lang['email_sent']                         = 'Email sukses dikirim!';
 $lang['email_failed']                       = 'Fungsi pengiriman email gagal!';
 $lang['back_to_pos']                        = 'Kembali ke POS';
@@ -170,7 +170,7 @@ $lang['open_register']                      = 'Buka Register';
 $lang['close_register']                     = 'Tutup Register';
 $lang['cash_in_hand']                       = 'Uang tunai di tangan';
 $lang['total_cash']                         = 'Total uang tunai';
-$lang['total_cheques']                      = 'Total Cek';
+$lang['total_cheques']                      = 'Total Ewallet';
 $lang['total_cc_slips']                     = 'Total Slips Kartu Kredit';
 $lang['CC']                                 = 'Kartu Kredit';
 $lang['register_closed']                    = 'Register sukses ditutup';
