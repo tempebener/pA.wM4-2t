@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="<?=$assets?>pos/css/print.css" type="text/css" media="print"/>
     <script type="text/javascript" src="<?=$assets?>js/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="<?=$assets?>js/jquery-migrate-1.2.1.min.js"></script>
-    <!-- bayoeway style -->
-    <link rel="stylesheet" href="<?= $assets ?>styles/bayoeway-style.css">
     <!--[if lt IE 9]>
     <script src="<?=$assets?>js/jquery.js"></script>
     <![endif]-->

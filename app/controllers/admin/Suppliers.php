@@ -332,6 +332,18 @@ class Suppliers extends MY_Controller
         $this->sma->send_json($rows);
     }
 
+    public function suggestions_whub($term = null, $limit = null)
+    {
+        // $this->sma->checkPermissions('index');
+        if ($this->input->get('term')) {
+            $term = $this->input->get('term', true);
+        }
+        $whub2=$this->session->userdata('whub_id');
+        $limit           = $this->input->get('limit', true);
+        $rows['results'] = $this->companies_model->getWhubSuggestions($whub2,$term, $limit);
+        $this->sma->send_json($rows);
+    }
+
     public function supplier_actions()
     {
         if (!$this->Owner && !$this->GP['bulk_actions']) {

@@ -139,10 +139,10 @@
                             <p style="font-weight:bold;"><?= lang('status'); ?>: <?= lang($inv->status); ?></p>
                             <p style="font-weight:bold;"><?= lang('payment_status'); ?>: <?= lang($inv->payment_status); ?></p>
                         </div>
-                        <div class="col-xs-12 order_barcodes">
+                        <!-- <div class="col-xs-12 order_barcodes">
                             <img src="<?= admin_url('misc/barcode/' . $this->sma->base64url_encode($inv->reference_no) . '/code128/74/0/1'); ?>" alt="<?= $inv->reference_no; ?>" class="bcimg" />
                             <?= $this->sma->qrcode('link', urlencode(admin_url('purchases/view/' . $inv->id)), 2); ?>
-                        </div>
+                        </div> -->
                         <div class="clearfix"></div>
 
 

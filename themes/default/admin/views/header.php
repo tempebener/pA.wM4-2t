@@ -490,7 +490,7 @@
                                 </ul>
                             </li>
 
-                            <li class="mm_quotes">
+                            <!-- <li class="mm_quotes">
                                 <a class="dropmenu" href="#">
                                     <i class="fas fa-file-signature"></i>
                                     <span class="text"> <?= lang('quotes'); ?> </span>
@@ -510,46 +510,15 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> -->
 
                             <li class="mm_purchases">
-                                <a class="dropmenu" href="#">
+                                <a class="submenu" href="<?= admin_url('purchases'); ?>">
                                     <i class="fas fa-shopping-basket"></i>
                                     <span class="text"> <?= lang('purchases'); ?>
-                                    </span> <span class="chevron closed"></span>
+                                    
                                 </a>
-                                <ul>
-                                    <li id="purchases_index">
-                                        <a class="submenu" href="<?= admin_url('purchases'); ?>">
-                                            <i class="fa fa-star"></i>
-                                            <span class="text"> <?= lang('list_purchases'); ?></span>
-                                        </a>
-                                    </li>
-                                    <li id="purchases_add">
-                                        <a class="submenu" href="<?= admin_url('purchases/add'); ?>">
-                                            <i class="fa fa-plus-circle"></i>
-                                            <span class="text"> <?= lang('add_purchase'); ?></span>
-                                        </a>
-                                    </li>
-                                    <li id="purchases_purchase_by_csv">
-                                        <a class="submenu" href="<?= admin_url('purchases/purchase_by_csv'); ?>">
-                                            <i class="fa fa-plus-circle"></i>
-                                            <span class="text"> <?= lang('add_purchase_by_csv'); ?></span>
-                                        </a>
-                                    </li>
-                                    <li id="purchases_expenses">
-                                        <a class="submenu" href="<?= admin_url('purchases/expenses'); ?>">
-                                            <i class="fa fa-dollar"></i>
-                                            <span class="text"> <?= lang('list_expenses'); ?></span>
-                                        </a>
-                                    </li>
-                                    <li id="purchases_add_expense">
-                                        <a class="submenu" href="<?= admin_url('purchases/add_expense'); ?>" data-toggle="modal" data-target="#myModal">
-                                            <i class="fa fa-plus-circle"></i>
-                                            <span class="text"> <?= lang('add_expense'); ?></span>
-                                        </a>
-                                    </li>
-                                </ul>
+                               
                             </li>
 
                             <li class="mm_transfers">
@@ -856,6 +825,11 @@
                                             <i class="fa fa-heart"></i><span class="text"> <?= lang('sales_report'); ?></span>
                                         </a>
                                     </li>
+                                    <li id="reports_product_sales">
+                                        <a href="<?= admin_url('reports/sales_products') ?>">
+                                            <i class="fa fa-heart"></i><span class="text"> <?= lang('product_sales_report'); ?></span>
+                                        </a>
+                                    </li>
                                     <li id="reports_payments">
                                         <a href="<?= admin_url('reports/payments') ?>">
                                             <i class="fa fa-money"></i><span class="text"> <?= lang('payments_report'); ?></span>
@@ -1090,7 +1064,7 @@
                             <?php
                         } ?>
 
-                            <?php if ($GP['quotes-index'] || $GP['quotes-add']) {
+                            <!-- <?php if ($GP['quotes-index'] || $GP['quotes-add']) {
                             ?>
                             <li class="mm_quotes">
                                 <a class="dropmenu" href="#">
@@ -1116,47 +1090,17 @@
                                 </ul>
                             </li>
                             <?php
-                        } ?>
+                        } ?> -->
 
                             <?php if ($GP['purchases-index'] || $GP['purchases-add'] || $GP['purchases-expenses']) {
                             ?>
                             <li class="mm_purchases">
-                                <a class="dropmenu" href="#">
+                                <a class="submenu" href="<?= admin_url('purchases'); ?>">
                                     <i class="fa fa-star"></i>
                                     <span class="text"> <?= lang('purchases'); ?>
-                                    </span> <span class="chevron closed"></span>
+                                  
                                 </a>
-                                <ul>
-                                    <li id="purchases_index">
-                                        <a class="submenu" href="<?= admin_url('purchases'); ?>">
-                                            <i class="fa fa-star"></i><span class="text"> <?= lang('list_purchases'); ?></span>
-                                        </a>
-                                    </li>
-                                    <?php if ($GP['purchases-add']) {
-                                ?>
-                                    <li id="purchases_add">
-                                        <a class="submenu" href="<?= admin_url('purchases/add'); ?>">
-                                            <i class="fa fa-plus-circle"></i><span class="text"> <?= lang('add_purchase'); ?></span>
-                                        </a>
-                                    </li>
-                                    <?php
-                            } ?>
-                                    <?php if ($GP['purchases-expenses']) {
-                                ?>
-                                    <li id="purchases_expenses">
-                                        <a class="submenu" href="<?= admin_url('purchases/expenses'); ?>">
-                                            <i class="fa fa-dollar"></i><span class="text"> <?= lang('list_expenses'); ?></span>
-                                        </a>
-                                    </li>
-                                    <li id="purchases_add_expense">
-                                        <a class="submenu" href="<?= admin_url('purchases/add_expense'); ?>"
-                                            data-toggle="modal" data-target="#myModal">
-                                            <i class="fa fa-plus-circle"></i><span class="text"> <?= lang('add_expense'); ?></span>
-                                        </a>
-                                    </li>
-                                    <?php
-                            } ?>
-                                </ul>
+                               
                             </li>
                             <?php
                         } ?>

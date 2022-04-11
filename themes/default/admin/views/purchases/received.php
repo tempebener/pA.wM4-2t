@@ -163,9 +163,9 @@
         $('#reset').click(function (e) {
             $(window).unbind('beforeunload');
         });
-        $('#edit_pruchase').click(function () {
+        $('#received_pruchase').click(function () {
             $(window).unbind('beforeunload');
-            $('form.edit-po-form').submit();
+            $('form.received-po-form').submit();
         });
 
     });
@@ -175,7 +175,7 @@
 
 <div class="box">
     <div class="box-header">
-        <h2 class="blue"><i class="fa-fw fa fa-edit"></i><?= lang('received_purchase'); ?></h2>
+        <h2 class="blue"><i class="fa-fw fa fa-edit"></i><?= lang('edit_purchase'); ?></h2>
     </div>
     <div class="box-content">
         <div class="row">
@@ -183,8 +183,8 @@
 
                 <p class="introtext"><?php echo lang('enter_info'); ?></p>
                 <?php
-                $attrib = ['data-toggle' => 'validator', 'role' => 'form', 'class' => 'edit-po-form'];
-                echo admin_form_open_multipart('purchases/edit/' . $inv->id, $attrib)
+                $attrib = ['data-toggle' => 'validator', 'role' => 'form', 'class' => 'received-po-form'];
+                echo admin_form_open_multipart('purchases/received/' . $inv->id, $attrib)
                 ?>
 
 
@@ -204,7 +204,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <?= lang('reference_no', 'poref'); ?>
-                                <?php echo form_input('reference_no', (isset($_POST['reference_no']) ? $_POST['reference_no'] : $purchase->reference_no), 'class="form-control input-tip" id="poref" required="required" readonly'); ?>
+                                <?php echo form_input('reference_no', (isset($_POST['reference_no']) ? $_POST['reference_no'] : $purchase->reference_no), 'class="form-control input-tip" id="poref" required="required"'); ?>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -378,7 +378,7 @@
                         </div>
                         <div class="col-md-12">
                             <div
-                                class="from-group"><?php echo form_submit('edit_pruchase', $this->lang->line('submit'), 'id="edit_pruchase" class="btn btn-primary" style="padding: 6px 15px; margin:15px 0;"'); ?>
+                                class="from-group"><?php echo form_submit('received_pruchase', $this->lang->line('submit'), 'id="received_pruchase" class="btn btn-primary" style="padding: 6px 15px; margin:15px 0;"'); ?>
                                 <button type="button" class="btn btn-danger" id="reset"><?= lang('reset') ?></button>
                             </div>
                         </div>

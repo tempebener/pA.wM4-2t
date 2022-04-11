@@ -276,6 +276,20 @@ class Companies_model extends CI_Model
         }
     }
 
+    public function getWhubSuggestions($whub2,$term, $limit = 10)
+    {
+        $this->db->select("id, (CASE WHEN company = '-' THEN name ELSE CONCAT(company, ' (', name, ')') END) as text", false);
+        $this->db->where(" (id LIKE '%" . $term . "%' OR name LIKE '%" . $term . "%' OR company LIKE '%" . $term . "%' OR email LIKE '%" . $term . "%' OR phone LIKE '%" . $term . "%') ");
+        $q = $this->db->get_where('companies', ['group_name' => 'whub'], $limit);
+        if ($q->num_rows() > 0) {
+            foreach (($q->result()) as $row) {
+                $data[] = $row;
+            }
+
+            return $data;
+        }
+    }
+
     public function updateAddress($id, $data)
     {
         if ($this->db->update('addresses', $data, ['id' => $id])) {

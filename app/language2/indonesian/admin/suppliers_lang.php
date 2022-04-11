@@ -21,16 +21,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * Thank you
  */
 
-$lang['add_supplier']                       = 'Tambah Pemasok';
-$lang['edit_supplier']                      = 'Ubah Pemasok';
-$lang['delete_supplier']                    = 'Hapus Pemasok';
-$lang['delete_suppliers']                   = 'Hapus Pemasok-pemasok';
-$lang['supplier_added']                     = 'Pemasok sukses ditambahkan';
-$lang['suppliers_added']                    = 'Pemasok-pemasok sukses ditambahkan';
-$lang['supplier_updated']                   = 'Pemasok sukses diubah';
-$lang['supplier_deleted']                   = 'Pemasok sukses dihapus';
+$lang['add_supplier']                       = 'Tambah Supplier';
+$lang['edit_supplier']                      = 'Ubah Supplier';
+$lang['delete_supplier']                    = 'Hapus Supplier';
+$lang['delete_suppliers']                   = 'Hapus Supplier-pemasok';
+$lang['supplier_added']                     = 'Supplier sukses ditambahkan';
+$lang['suppliers_added']                    = 'Supplier-pemasok sukses ditambahkan';
+$lang['supplier_updated']                   = 'Supplier sukses diubah';
+$lang['supplier_deleted']                   = 'Supplier sukses dihapus';
 $lang['suppliers_deleted']                  = 'Suppliers sukses dihapus';
-$lang['import_by_csv']                      = 'Tampah/Update Pemasok-pemasok via CSV';
+$lang['import_by_csv']                      = 'Tampah/Update Supplier-pemasok via CSV';
 $lang['edit_profile']                       = 'Ubah Pengguna';
 $lang['delete_user']                        = 'Hapus Pengguna';
 $lang['no_supplier_selected']               = 'Tidak ada pemasok yang dipilih. Silakan pilih setidaknya satu pemasok.';
@@ -40,7 +40,7 @@ $lang['user_deleted']                       = 'Penguna pemasok sukses dihapus';
 $lang['supplier_x_deleted_have_purchases']  = 'Aksi gagal! pemasok memiliki pembelian';
 $lang['suppliers_x_deleted_have_purchases'] = 'Beberapa pemasok tidak dapat dihapus karena mereka memiliki pembelian';
 $lang['check_supplier_email']               = 'Silakan periksa email pemasok';
-$lang['supplier_already_exist']             = 'Pemasok sudah ada dengan alamat email yang sama';
+$lang['supplier_already_exist']             = 'Supplier sudah ada dengan alamat email yang sama';
 $lang['line_no']                            = 'Nomor Baris';
 $lang['first_6_required']                   = 'Enam Pertama (6) kolom diperlukan dan yang lain opsional.';
 $lang['are_required']                       = 'diperlukan';

@@ -42,7 +42,7 @@
         ], "footer");
 
         <?php if ($this->session->userdata('remove_pols')) {
-    ?>
+        ?>
         if (localStorage.getItem('poitems')) {
             localStorage.removeItem('poitems');
         }
@@ -83,11 +83,13 @@
             localStorage.removeItem('popayment_term');
         }
         <?php $this->sma->unset_data('remove_pols');
-}
+        }
         ?>
-    });
+        });
 
 </script>
+
+
 
 <?php if ($Owner || $GP['bulk_actions']) {
             echo admin_form_open('purchases/purchase_actions', 'id="action-form"');
@@ -130,7 +132,7 @@
                     </ul>
                 </li>
                 <?php if (!empty($warehouses)) {
-    ?>
+                ?>
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon far fa-building tip" data-placement="left" title="<?=lang('warehouses')?>"></i></a>
                         <ul class="dropdown-menu pull-right tasks-menus" role="menu" aria-labelledby="dLabel">
@@ -143,7 +145,7 @@
                         </ul>
                     </li>
                 <?php
-}
+                }
                 ?>
             </ul>
         </div>

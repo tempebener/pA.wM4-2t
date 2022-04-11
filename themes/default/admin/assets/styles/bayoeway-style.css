@@ -36,15 +36,15 @@
 }
 
 /*Navbar*/
-/*.navbar {
+.navbar {
   background: unset;
 }
 .btn-visible-sm .btn {
   color: unset;
-}*/
+}
 
 /*Sidebar*/
-/*.nav.main-menu > li > a, .nav.main-menu > li > ul > li > a, .nav.main-menu > li > ul > li > ul > li > a, .nav.main-menu > li > ul > li > ul > li > ul > li > a {
+.nav.main-menu > li > a, .nav.main-menu > li > ul > li > a, .nav.main-menu > li > ul > li > ul > li > a, .nav.main-menu > li > ul > li > ul > li > ul > li > a {
   background: unset;
 }
 #sidebar-left {
@@ -95,10 +95,10 @@ a#main-menu-act i {
 }
 .header-nav a.btn:hover .user{
   color: white !important;
-}*/
+}
 
 /*Submenu Sidebar*/
-/*.nav.main-menu > li > ul > li.active > a, .nav.main-menu > li > ul > li > ul > li.active > a, .nav.main-menu > li > ul > li > ul > li > ul > li.active > a {
+.nav.main-menu > li > ul > li.active > a, .nav.main-menu > li > ul > li > ul > li.active > a, .nav.main-menu > li > ul > li > ul > li > ul > li.active > a {
   background: white;
   color: #bc2030;
   border-color: white;
@@ -131,12 +131,9 @@ a.navbar-brand span {
   display: block;
   overflow: hidden;
   text-overflow: clip;
-}*/
-
-/*POS*/
-.btn-prni {
-  font-size: 11px !important;
 }
+
+
 
 
 /*Collapse Sidebar*/
