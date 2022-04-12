@@ -36,12 +36,12 @@
 }
 
 /*Navbar*/
-/*.navbar {
+.navbar {
   background: unset;
 }
 .btn-visible-sm .btn {
   color: unset;
-}*/
+}
 
 /*Sidebar*/
 .nav.main-menu > li > a, .nav.main-menu > li > ul > li > a, .nav.main-menu > li > ul > li > ul > li > a, .nav.main-menu > li > ul > li > ul > li > ul > li > a {
@@ -102,7 +102,7 @@ a#main-menu-act i {
 }
 
 /*Submenu Sidebar*/
-/*.nav.main-menu > li > ul > li.active > a, .nav.main-menu > li > ul > li > ul > li.active > a, .nav.main-menu > li > ul > li > ul > li > ul > li.active > a {
+.nav.main-menu > li > ul > li.active > a, .nav.main-menu > li > ul > li > ul > li.active > a, .nav.main-menu > li > ul > li > ul > li > ul > li.active > a {
   background: white;
   color: #bc2030;
   border-color: white;
@@ -125,7 +125,7 @@ a#main-menu-act i {
   border-radius: .50rem;
 }
 a.navbar-brand {
-  width: 250px;
+  width: 150px;
   white-space: nowrap;
 }
 a.navbar-brand span {
@@ -135,7 +135,7 @@ a.navbar-brand span {
   display: block;
   overflow: hidden;
   text-overflow: clip;
-}*/
+}
 
 /*Body*/
 body {
