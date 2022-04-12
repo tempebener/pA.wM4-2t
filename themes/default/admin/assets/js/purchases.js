@@ -660,8 +660,10 @@ function loadItems() {
                 item_name = item.row.name.replace(/"/g, "&#034;").replace(/'/g, "&#039;");
             var qty_received = (item.row.received >= 0) ? item.row.received : item.row.qty;
             var item_supplier_part_no = item.row.supplier_part_no ? item.row.supplier_part_no : '';
-            if (item.row.new_entry == 1) { item_bqty = item_qty;
-                item_oqty = item_qty; }
+            if (item.row.new_entry == 1) {
+                item_bqty = item_qty;
+                item_oqty = item_qty;
+            }
             var unit_cost = item.row.real_unit_cost;
             var product_unit = item.row.unit,
                 base_quantity = item.row.base_quantity;

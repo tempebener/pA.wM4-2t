@@ -175,7 +175,7 @@
 
 <div class="box">
     <div class="box-header">
-        <h2 class="blue"><i class="fa-fw fa fa-edit"></i><?= lang('edit_purchase'); ?></h2>
+        <h2 class="blue"><i class="fa-fw fa fa-edit"></i><?= lang('received_purchase'); ?></h2>
     </div>
     <div class="box-content">
         <div class="row">
@@ -188,54 +188,9 @@
                 ?>
 
 
+                       
+
                 <div class="row">
-                    <div class="col-lg-12">
-
-                        <?php if ($Owner || $Admin) {
-                    ?>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <?= lang('date', 'podate'); ?>
-                                    <?php echo form_input('date', (isset($_POST['date']) ? $_POST['date'] : $this->sma->hrld($purchase->date)), 'class="form-control input-tip datetime" id="podate" required="required"'); ?>
-                                </div>
-                            </div>
-                        <?php
-                } ?>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <?= lang('reference_no', 'poref'); ?>
-                                <?php echo form_input('reference_no', (isset($_POST['reference_no']) ? $_POST['reference_no'] : $purchase->reference_no), 'class="form-control input-tip" id="poref" required="required"'); ?>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <?= lang('warehouse', 'powarehouse'); ?>
-                                <?php
-                                $wh[''] = '';
-                                foreach ($warehouses as $warehouse) {
-                                    $wh[$warehouse->id] = $warehouse->name;
-                                }
-                                echo form_dropdown('warehouse', $wh, (isset($_POST['warehouse']) ? $_POST['warehouse'] : $purchase->warehouse_id), 'id="powarehouse" class="form-control input-tip select" data-placeholder="' . $this->lang->line('select') . ' ' . $this->lang->line('warehouse') . '" required="required" style="width:100%;" ');
-                                ?>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <?= lang('status', 'postatus'); ?>
-                                <?php
-                                $post = ['received' => lang('received'), 'partial' => lang('partial'), 'pending' => lang('pending'), 'ordered' => lang('ordered')];
-                                echo form_dropdown('status', $post, (isset($_POST['status']) ? $_POST['status'] : $purchase->status), 'id="postatus" class="form-control input-tip select" data-placeholder="' . $this->lang->line('select') . ' ' . $this->lang->line('status') . '" required="required" style="width:100%;" ');
-                                ?>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <?= lang('document', 'document') ?>
-                                <input id="document" type="file" data-browse-label="<?= lang('browse'); ?>" name="document" data-show-upload="false"
-                                       data-show-preview="false" class="form-control file">
-                            </div>
-                        </div>
 
                         <div class="col-md-12">
                             <div class="panel panel-warning">
@@ -260,10 +215,79 @@
                                         </div>
                                     </div>
 
+                                    <?php if ($Owner || $Admin) {
+                                    ?>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <?= lang('date', 'podate'); ?>
+                                                    <?php echo form_input('date', (isset($_POST['date']) ? $_POST['date'] : $this->sma->hrld($purchase->date)), 'class="form-control input-tip datetime" id="podate" required="required"'); ?>
+                                                </div>
+                                            </div>
+                                        <?php
+                                    } ?>
+
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <?= lang('reference_no', 'poref'); ?>
+                                        <?php echo form_input('reference_no', (isset($_POST['reference_no']) ? $_POST['reference_no'] : $purchase->reference_no), 'class="form-control input-tip" id="poref" required="required"'); ?>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <?= lang('payment_term', 'popayment_term'); ?>
+                                        <?php echo form_input('payment_term', '', 'class="form-control tip" data-trigger="focus" data-placement="top" title="' . lang('payment_term_tip') . '" id="popayment_term"'); ?>
+                                    </div>
+                                </div>
+
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                         </div>
+
+
+
+                    <div class="col-lg-12">
+
+                    
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <?= lang('delivery_date', 'podeliveridate'); ?>
+                                    <?php echo form_input('date', (isset($_POST['date']) ? $_POST['date'] : $this->sma->hrld($purchase->date)), 'class="form-control input-tip datetime" id="podate" required="required"'); ?>
+                                </div>
+                            </div>
+
+                       
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <?= lang('warehouse', 'powarehouse'); ?>
+                                <?php
+                                $wh[''] = '';
+                                foreach ($warehouses as $warehouse) {
+                                    $wh[$warehouse->id] = $warehouse->name;
+                                }
+                                echo form_dropdown('warehouse', $wh, (isset($_POST['warehouse']) ? $_POST['warehouse'] : $purchase->warehouse_id), 'id="powarehouse" class="form-control input-tip select" data-placeholder="' . $this->lang->line('select') . ' ' . $this->lang->line('warehouse') . '" required="required" style="width:100%;" ');
+                                ?>
+                            </div>
+                        </div>
+
+                               
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <?= lang('status', 'postatus'); ?>
+                                <?php
+                                $post = ['received' => lang('received'), 'partial' => lang('partial'), 'pending' => lang('pending')];
+                                echo form_dropdown('status', $post, (isset($_POST['status']) ? $_POST['status'] : $purchase->status), 'id="postatus" class="form-control input-tip select" data-placeholder="' . $this->lang->line('select') . ' ' . $this->lang->line('status') . '" required="required" style="width:100%;" ');
+                                ?>
+                            </div>
+                        </div>
+
+                      
+
+                        
 
                         <div class="col-md-12" id="sticker">
                             <div class="well well-sm">
@@ -364,10 +388,13 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <?= lang('payment_term', 'popayment_term'); ?>
-                                        <?php echo form_input('payment_term', '', 'class="form-control tip" data-trigger="focus" data-placement="top" title="' . lang('payment_term_tip') . '" id="popayment_term"'); ?>
+                                        <?= lang('document', 'document') ?>
+                                        <input id="document" type="file" data-browse-label="<?= lang('browse'); ?>" name="document" data-show-upload="false"
+                                            data-show-preview="false" class="form-control file">
                                     </div>
                                 </div>
+
+                              
                             </div>
                             <div class="clearfix"></div>
                             <div class="form-group">

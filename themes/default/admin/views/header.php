@@ -377,6 +377,8 @@
                                 <span class="text"> <?= lang('dashboard'); ?></span>
                             </a>
                         </li>
+                         
+                      
 
                         <?php
                         if ($Owner || $Admin) {
@@ -745,6 +747,15 @@
                                 </li>
                             <?php
                             } ?>
+                            <li class="mm_reports">
+                                <a class="dropmenu" href="#">
+                                    <i class="fa fa-bar-chart-o"></i>
+                                    <span class="text"> <?= lang('reports'); ?> </span>
+                                    
+                                </a>
+                              
+                            </li>
+
                             <li class="mm_reports">
                                 <a class="dropmenu" href="#">
                                     <i class="fa fa-bar-chart-o"></i>

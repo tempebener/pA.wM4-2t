@@ -1569,7 +1569,7 @@ class Purchases extends MY_Controller
         }
         $detail_link      = anchor('admin/purchases/view/$1', '<i class="far fa-file-alt"></i> ' . lang('purchase_details'));
         $email_link       = anchor('admin/purchases/email/$1', '<i class="fa fa-envelope"></i> ' . lang('email_purchase'), 'data-toggle="modal" data-target="#myModal"');
-        $edit_link        = anchor('admin/purchases/edit/$1', '<i class="fa fa-edit"></i> ' . lang('receipt_purchase'));
+        $edit_link        = anchor('admin/purchases/received/$1', '<i class="fa fa-edit"></i> ' . lang('receipt_purchase'));
         $pdf_link         = anchor('admin/purchases/pdf/$1', '<i class="fa fa-file-pdf-o"></i> ' . lang('download_pdf'));
         $delete_link      = "<a href='#' class='po' title='<b>" . $this->lang->line('delete_purchase') . "</b>' data-content=\"<p>"
         . lang('r_u_sure') . "</p><a class='btn btn-danger po-delete' href='" . admin_url('purchases/delete/$1') . "'>"
@@ -1591,13 +1591,13 @@ class Purchases extends MY_Controller
         $this->load->library('datatables');
         if ($warehouse_id) {
             $this->datatables
-                ->select("id, DATE_FORMAT(date, '%Y-%m-%d %T') as date, reference_no, supplier, status, grand_total, paid, (grand_total-paid) as balance, attachment")
+                ->select("id, DATE_FORMAT(date, '%Y-%m-%d %T') as date, reference_no, supplier,DATE_FORMAT(due_date, '%Y-%m-%d') as due_date, status, grand_total, paid, (grand_total-paid) as balance, attachment")
                 ->from('purchases')
                 ->where('warehouse_id', $warehouse_id)
                 ->where('status', 'ordered');
         } else {
             $this->datatables
-                ->select("id, DATE_FORMAT(date, '%Y-%m-%d %T') as date, reference_no, supplier, status, grand_total, paid, (grand_total-paid) as balance, attachment")
+                ->select("id, DATE_FORMAT(date, '%Y-%m-%d %T') as date, reference_no, supplier,DATE_FORMAT(due_date, '%Y-%m-%d') as due_date, status, grand_total, paid, (grand_total-paid) as balance, attachment")
                 ->from('purchases')
                 ->where('status', 'ordered');
         }

@@ -286,6 +286,14 @@
 
                     echo form_input($warehouse_input);
                 } ?>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <?= lang('payment_term', 'popayment_term'); ?>
+                                        <?php echo form_input('payment_term', '', 'class="form-control tip" data-trigger="focus" data-placement="top" title="' . lang('payment_term_tip') . '" id="popayment_term"'); ?>
+                                    </div>
+                                </div>    
+
                         <div class="col-md-4">
                             <div class="form-group">
                                 <?= lang('status', 'postatus'); ?>
@@ -296,13 +304,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <?= lang('document', 'document') ?>
-                                <input id="document" type="file" data-browse-label="<?= lang('browse'); ?>" name="document" data-show-upload="false"
-                                       data-show-preview="false" class="form-control file">
-                            </div>
-                        </div>
+                    
 
                         <div class="col-md-12">
                             <div class="panel panel-warning">
@@ -414,6 +416,8 @@
                         <div class="clearfix"></div>
                         <input type="hidden" name="total_items" value="" id="total_items" required="required"/>
 
+                                      
+
                         <div class="col-md-12">
                             <div class="form-group">
                                 <input type="checkbox" class="checkbox" id="extras" value=""/>
@@ -443,6 +447,8 @@
                                     </div>
                                 </div>
 
+                               
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <?= lang('shipping', 'poshipping'); ?>
@@ -452,10 +458,13 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <?= lang('payment_term', 'popayment_term'); ?>
-                                        <?php echo form_input('payment_term', '', 'class="form-control tip" data-trigger="focus" data-placement="top" title="' . lang('payment_term_tip') . '" id="popayment_term"'); ?>
+                                        <?= lang('document', 'document') ?>
+                                        <input id="document" type="file" data-browse-label="<?= lang('browse'); ?>" name="document" data-show-upload="false"
+                                            data-show-preview="false" class="form-control file">
                                     </div>
                                 </div>
+
+                              
                             </div>
                             <div class="clearfix"></div>
                             <div class="form-group">
@@ -464,6 +473,9 @@
                             </div>
 
                         </div>
+
+
+
                         <div class="col-md-12">
                             <div
                                 class="from-group"><?php echo form_submit('add_pruchase', $this->lang->line('submit'), 'id="add_pruchase" class="btn btn-primary" style="padding: 6px 15px; margin:15px 0;"'); ?>
