@@ -172,7 +172,7 @@
                             <th></th>
                             <th><?= lang('grand_total'); ?></th>
                             <th><?= lang('paid'); ?></th>
-                            <th><?= lang('balance'); ?></th>
+                            <th><?= lang('balance66'); ?></th>
                             <th class="defaul-color"></th>
                             <th class="defaul-color"></th>
                             <th style="width:80px; text-align:center;"><?= lang('actions'); ?></th>

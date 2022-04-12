@@ -29,6 +29,9 @@ class Purchases extends MY_Controller
 
     /* -------------------------------------------------------------------------------------------------------------------------------- */
 
+  
+
+
     public function add($quote_id = null)
     {
         $this->sma->checkPermissions();
@@ -282,6 +285,7 @@ class Purchases extends MY_Controller
                 $this->data['quote_items'] = json_encode($pr);
             }
 
+            $this->data['whub1']=$this->session->userdata('whub_id');    
             $this->data['error']      = (validation_errors() ? validation_errors() : $this->session->flashdata('error'));
             $this->data['quote_id']   = $quote_id;
             $this->data['suppliers']  = $this->site->getAllCompanies('supplier');
@@ -513,6 +517,273 @@ class Purchases extends MY_Controller
             //echo lang("payment_deleted");
             $this->session->set_flashdata('message', lang('payment_deleted'));
             redirect($_SERVER['HTTP_REFERER']);
+        }
+    }
+
+    /* -------------------------------------------------------------------------------- */
+
+    public function received($id = null)
+    {
+        $this->sma->checkPermissions();
+
+        if ($this->input->get('id')) {
+            $id = $this->input->get('id');
+        }
+        $inv = $this->purchases_model->getPurchaseByID($id);
+        if ($inv->status == 'returned' || $inv->return_id || $inv->return_purchase_ref) {
+            $this->session->set_flashdata('error', lang('purchase_x_action'));
+            admin_redirect(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'welcome');
+        }
+        if (!$this->session->userdata('edit_right')) {
+            $this->sma->view_rights($inv->created_by);
+        }
+        $this->form_validation->set_message('is_natural_no_zero', $this->lang->line('no_zero_required'));
+        $this->form_validation->set_rules('reference_no', $this->lang->line('ref_no'), 'required');
+        $this->form_validation->set_rules('warehouse', $this->lang->line('warehouse'), 'required|is_natural_no_zero');
+        $this->form_validation->set_rules('supplier', $this->lang->line('supplier'), 'required');
+
+        $this->session->unset_userdata('csrf_token');
+        if ($this->form_validation->run() == true) {
+            $reference = $this->input->post('reference_no');
+            if ($this->Owner || $this->Admin) {
+                $date = $this->sma->fld(trim($this->input->post('date')));
+            } else {
+                $date = $inv->date;
+            }
+            $warehouse_id     = $this->input->post('warehouse');
+            $supplier_id      = $this->input->post('supplier');
+            $status           = $this->input->post('status');
+            $shipping         = $this->input->post('shipping') ? $this->input->post('shipping') : 0;
+            $supplier_details = $this->site->getCompanyByID($supplier_id);
+            $supplier         = $supplier_details->company && $supplier_details->company != '-' ? $supplier_details->company : $supplier_details->name;
+            $note             = $this->sma->clear_tags($this->input->post('note'));
+            $payment_term     = $this->input->post('payment_term');
+            $due_date         = $payment_term ? date('Y-m-d', strtotime('+' . $payment_term . ' days', strtotime($date))) : null;
+
+            $total            = 0;
+            $product_tax      = 0;
+            $product_discount = 0;
+            $partial          = false;
+            $i                = sizeof($_POST['product']);
+            $gst_data         = [];
+            $total_cgst       = $total_sgst       = $total_igst       = 0;
+            for ($r = 0; $r < $i; $r++) {
+                $item_code          = $_POST['product'][$r];
+                $item_net_cost      = $this->sma->formatDecimal($_POST['net_cost'][$r]);
+                $unit_cost          = $this->sma->formatDecimal($_POST['unit_cost'][$r]);
+                $real_unit_cost     = $this->sma->formatDecimal($_POST['real_unit_cost'][$r]);
+                $item_unit_quantity = $_POST['quantity'][$r];
+                $quantity_received  = $_POST['received_base_quantity'][$r];
+                $item_option        = isset($_POST['product_option'][$r]) && $_POST['product_option'][$r] != 'false' ? $_POST['product_option'][$r] : null;
+                $item_tax_rate      = isset($_POST['product_tax'][$r]) ? $_POST['product_tax'][$r] : null;
+                $item_discount      = isset($_POST['product_discount'][$r]) ? $_POST['product_discount'][$r] : null;
+                $item_expiry        = (isset($_POST['expiry'][$r]) && !empty($_POST['expiry'][$r])) ? $this->sma->fsd($_POST['expiry'][$r]) : null;
+                $supplier_part_no   = (isset($_POST['part_no'][$r]) && !empty($_POST['part_no'][$r])) ? $_POST['part_no'][$r] : null;
+                $quantity_balance   = $_POST['quantity_balance'][$r];
+                $ordered_quantity   = $_POST['ordered_quantity'][$r];
+                $item_unit          = $_POST['product_unit'][$r];
+                $item_quantity      = $_POST['product_base_quantity'][$r];
+
+                if ($status == 'received' || $status == 'partial') {
+                    if ($quantity_received < $item_quantity) {
+                        $partial = 'partial';
+                    } elseif ($quantity_received > $item_quantity) {
+                        $this->session->set_flashdata('error', lang('received_more_than_ordered'));
+                        redirect($_SERVER['HTTP_REFERER']);
+                    }
+                    $balance_qty = $quantity_received - ($ordered_quantity - $quantity_balance);
+                } else {
+                    $balance_qty       = $item_quantity;
+                    $quantity_received = $item_quantity;
+                }
+                if (isset($item_code) && isset($real_unit_cost) && isset($unit_cost) && isset($item_quantity) && isset($quantity_balance)) {
+                    $product_details = $this->purchases_model->getProductByCode($item_code);
+                    // $unit_cost = $real_unit_cost;
+                    $pr_discount      = $this->site->calculateDiscount($item_discount, $unit_cost);
+                    $unit_cost        = $this->sma->formatDecimal($unit_cost - $pr_discount);
+                    $item_net_cost    = $unit_cost;
+                    $pr_item_discount = $this->sma->formatDecimal($pr_discount * $item_unit_quantity);
+                    $product_discount += $pr_item_discount;
+                    $pr_item_tax = 0;
+                    $item_tax    = 0;
+                    $tax         = '';
+
+                    if (isset($item_tax_rate) && $item_tax_rate != 0) {
+                        $tax_details = $this->site->getTaxRateByID($item_tax_rate);
+                        $ctax        = $this->site->calculateTax($product_details, $tax_details, $unit_cost);
+                        $item_tax    = $ctax['amount'];
+                        $tax         = $ctax['tax'];
+                        if ($product_details->tax_method != 1) {
+                            $item_net_cost = $unit_cost - $item_tax;
+                        }
+                        $pr_item_tax = $this->sma->formatDecimal($item_tax * $item_unit_quantity, 4);
+                        if ($this->Settings->indian_gst && $gst_data = $this->gst->calculteIndianGST($pr_item_tax, ($this->Settings->state == $supplier_details->state), $tax_details)) {
+                            $total_cgst += $gst_data['cgst'];
+                            $total_sgst += $gst_data['sgst'];
+                            $total_igst += $gst_data['igst'];
+                        }
+                    }
+
+                    $product_tax += $pr_item_tax;
+                    $subtotal = (($item_net_cost * $item_unit_quantity) + $pr_item_tax);
+                    $unit     = $this->site->getUnitByID($item_unit);
+
+                    $item = [
+                        'product_id'        => $product_details->id,
+                        'product_code'      => $item_code,
+                        'product_name'      => $product_details->name,
+                        'option_id'         => $item_option,
+                        'net_unit_cost'     => $item_net_cost,
+                        'unit_cost'         => $this->sma->formatDecimal($item_net_cost + $item_tax),
+                        'quantity'          => $item_quantity,
+                        'product_unit_id'   => $item_unit,
+                        'product_unit_code' => $unit->code,
+                        'unit_quantity'     => $item_unit_quantity,
+                        'quantity_balance'  => $balance_qty,
+                        'quantity_received' => $quantity_received,
+                        'warehouse_id'      => $warehouse_id,
+                        'item_tax'          => $pr_item_tax,
+                        'tax_rate_id'       => $item_tax_rate,
+                        'tax'               => $tax,
+                        'discount'          => $item_discount,
+                        'item_discount'     => $pr_item_discount,
+                        'subtotal'          => $this->sma->formatDecimal($subtotal),
+                        'expiry'            => $item_expiry,
+                        'real_unit_cost'    => $real_unit_cost,
+                        'supplier_part_no'  => $supplier_part_no,
+                        'date'              => date('Y-m-d', strtotime($date)),
+                    ];
+
+                    $items[] = ($item + $gst_data);
+                    $total += $item_net_cost * $item_unit_quantity;
+                }
+            }
+
+            if (empty($items)) {
+                $this->form_validation->set_rules('product', lang('order_items'), 'required');
+            } else {
+                foreach ($items as $item) {
+                    $item['status'] = ($status == 'partial') ? 'received' : $status;
+                    $products[]     = $item;
+                }
+                krsort($products);
+            }
+
+            $order_discount = $this->site->calculateDiscount($this->input->post('discount'), ($total + $product_tax));
+            $total_discount = $this->sma->formatDecimal(($order_discount + $product_discount), 4);
+            $order_tax      = $this->site->calculateOrderTax($this->input->post('order_tax'), ($total + $product_tax - $order_discount));
+            $total_tax      = $this->sma->formatDecimal(($product_tax + $order_tax), 4);
+            $grand_total    = $this->sma->formatDecimal(($total + $total_tax + $this->sma->formatDecimal($shipping) - $order_discount), 4);
+            $data           = ['reference_no' => $reference,
+                'supplier_id'                 => $supplier_id,
+                'supplier'                    => $supplier,
+                'warehouse_id'                => $warehouse_id,
+                'note'                        => $note,
+                'total'                       => $total,
+                'product_discount'            => $product_discount,
+                'order_discount_id'           => $this->input->post('discount'),
+                'order_discount'              => $order_discount,
+                'total_discount'              => $total_discount,
+                'product_tax'                 => $product_tax,
+                'order_tax_id'                => $this->input->post('order_tax'),
+                'order_tax'                   => $order_tax,
+                'total_tax'                   => $total_tax,
+                'shipping'                    => $this->sma->formatDecimal($shipping),
+                'grand_total'                 => $grand_total,
+                'status'                      => $status,
+                'updated_by'                  => $this->session->userdata('user_id'),
+                'updated_at'                  => date('Y-m-d H:i:s'),
+                'payment_term'                => $payment_term,
+                'due_date'                    => $due_date,
+            ];
+            if ($date) {
+                $data['date'] = $date;
+            }
+            if ($this->Settings->indian_gst) {
+                $data['cgst'] = $total_cgst;
+                $data['sgst'] = $total_sgst;
+                $data['igst'] = $total_igst;
+            }
+
+            if ($_FILES['document']['size'] > 0) {
+                $this->load->library('upload');
+                $config['upload_path']   = $this->digital_upload_path;
+                $config['allowed_types'] = $this->digital_file_types;
+                $config['max_size']      = $this->allowed_file_size;
+                $config['overwrite']     = false;
+                $config['encrypt_name']  = true;
+                $this->upload->initialize($config);
+                if (!$this->upload->do_upload('document')) {
+                    $error = $this->upload->display_errors();
+                    $this->session->set_flashdata('error', $error);
+                    redirect($_SERVER['HTTP_REFERER']);
+                }
+                $photo              = $this->upload->file_name;
+                $data['attachment'] = $photo;
+            }
+
+            // $this->sma->print_arrays($data, $products);
+        }
+
+        if ($this->form_validation->run() == true && $this->purchases_model->updatePurchase($id, $data, $products)) {
+            $this->session->set_userdata('remove_pols', 1);
+            $this->session->set_flashdata('message', $this->lang->line('purchase_added'));
+            admin_redirect('purchases');
+        } else {
+            $this->data['error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('error'));
+            $this->data['inv']   = $inv;
+            if ($this->Settings->disable_editing) {
+                if ($this->data['inv']->date <= date('Y-m-d', strtotime('-' . $this->Settings->disable_editing . ' days'))) {
+                    $this->session->set_flashdata('error', sprintf(lang('purchase_x_edited_older_than_x_days'), $this->Settings->disable_editing));
+                    redirect($_SERVER['HTTP_REFERER']);
+                }
+            }
+            $inv_items = $this->purchases_model->getAllPurchaseItems($id);
+            // krsort($inv_items);
+            $c = rand(100000, 9999999);
+            foreach ($inv_items as $item) {
+                $row                   = $this->site->getProductByID($item->product_id);
+                $row->expiry           = (($item->expiry && $item->expiry != '0000-00-00') ? $this->sma->hrsd($item->expiry) : '');
+                $row->base_quantity    = $item->quantity;
+                $row->base_unit        = $row->unit ? $row->unit : $item->product_unit_id;
+                $row->base_unit_cost   = $row->cost ? $row->cost : $item->unit_cost;
+                $row->unit             = $item->product_unit_id;
+                $row->qty              = $item->unit_quantity;
+                $row->oqty             = $item->quantity;
+                $row->supplier_part_no = $item->supplier_part_no;
+                $row->received         = $item->quantity_received ? $item->quantity_received : $item->quantity;
+                $row->quantity_balance = $item->quantity_balance + ($item->quantity - $row->received);
+                $row->discount         = $item->discount ? $item->discount : '0';
+                $options               = $this->purchases_model->getProductOptions($row->id);
+                $row->option           = $item->option_id;
+                $row->real_unit_cost   = $item->real_unit_cost;
+                $row->cost             = $this->sma->formatDecimal($item->net_unit_cost + ($item->item_discount / $item->quantity));
+                $row->tax_rate         = $item->tax_rate_id;
+                unset($row->details, $row->product_details, $row->price, $row->file, $row->product_group_id);
+                $units    = $this->site->getUnitsByBUID($row->base_unit);
+                $tax_rate = $this->site->getTaxRateByID($row->tax_rate);
+                $ri       = $this->Settings->item_addition ? $row->id : $c;
+
+                $pr[$ri] = ['id' => $c, 'item_id' => $row->id, 'label' => $row->name . ' (' . $row->code . ')',
+                    'row'        => $row, 'tax_rate' => $tax_rate, 'units' => $units, 'options' => $options, ];
+                $c++;
+            }
+
+            $this->data['inv_items']  = json_encode($pr);
+            $this->data['id']         = $id;
+            $this->data['suppliers']  = $this->site->getAllCompanies('supplier');
+            $this->data['purchase']   = $this->purchases_model->getPurchaseByID($id);
+            $this->data['categories'] = $this->site->getAllCategories();
+            $this->data['tax_rates']  = $this->site->getAllTaxRates();
+            $this->data['warehouses'] = $this->site->getAllWarehouses();
+            $this->load->helper('string');
+            $value = random_string('alnum', 20);
+            $this->session->set_userdata('user_csrf', $value);
+            $this->session->set_userdata('remove_pols', 1);
+            $this->data['csrf'] = $this->session->userdata('user_csrf');
+            $bc                 = [['link' => base_url(), 'page' => lang('home')], ['link' => admin_url('purchases'), 'page' => lang('purchases')], ['link' => '#', 'page' => lang('received_purchase')]];
+            $meta               = ['page_title' => lang('received_purchase'), 'bc' => $bc];
+            $this->page_construct('purchases/received', $meta, $this->data);
         }
     }
 
@@ -1204,13 +1475,15 @@ class Purchases extends MY_Controller
         $this->load->library('datatables');
         if ($warehouse_id) {
             $this->datatables
-                ->select("id, DATE_FORMAT(date, '%Y-%m-%d %T') as date, reference_no, supplier, status, grand_total, paid, (grand_total-paid) as balance, payment_status, attachment")
+                ->select("id, DATE_FORMAT(date, '%Y-%m-%d %T') as date, reference_no, supplier, status, payment_status, attachment")
                 ->from('purchases')
+                ->where('status', 'received')
                 ->where('warehouse_id', $warehouse_id);
         } else {
             $this->datatables
-                ->select("id, DATE_FORMAT(date, '%Y-%m-%d %T') as date, reference_no, supplier, status, grand_total, paid, (grand_total-paid) as balance, payment_status, attachment")
-                ->from('purchases');
+                ->select("id, DATE_FORMAT(date, '%Y-%m-%d %T') as date, reference_no, supplier, status, payment_status, attachment")
+                ->from('purchases')
+                ->where('status', 'received');
         }
         // $this->datatables->where('status !=', 'returned');
         if (!$this->Customer && !$this->Supplier && !$this->Owner && !$this->Admin && !$this->session->userdata('view_right')) {
@@ -1221,6 +1494,124 @@ class Purchases extends MY_Controller
         $this->datatables->add_column('Actions', $action, 'id');
         echo $this->datatables->generate();
     }
+
+
+    public function getPurchases_invoice($warehouse_id = null)
+    {
+        $this->sma->checkPermissions('index');
+
+        if ((!$this->Owner || !$this->Admin) && !$warehouse_id) {
+            $user         = $this->site->getUser();
+            $warehouse_id = $user->warehouse_id;
+        }
+        $detail_link      = anchor('admin/purchases/view/$1', '<i class="far fa-file-alt"></i> ' . lang('purchase_details'));
+        $payments_link    = anchor('admin/purchases/payments/$1', '<i class="fa fa-money"></i> ' . lang('view_payments'), 'data-toggle="modal" data-target="#myModal"');
+        $add_payment_link = anchor('admin/purchases/add_payment/$1', '<i class="fa fa-money"></i> ' . lang('add_payment'), 'data-toggle="modal" data-target="#myModal"');
+        $email_link       = anchor('admin/purchases/email/$1', '<i class="fa fa-envelope"></i> ' . lang('email_purchase'), 'data-toggle="modal" data-target="#myModal"');
+        $edit_link        = anchor('admin/purchases/edit/$1', '<i class="fa fa-edit"></i> ' . lang('edit_purchase'));
+        $pdf_link         = anchor('admin/purchases/pdf/$1', '<i class="fa fa-file-pdf-o"></i> ' . lang('download_pdf'));
+        $print_barcode    = anchor('admin/products/print_barcodes/?purchase=$1', '<i class="fa fa-print"></i> ' . lang('print_barcodes'));
+        $return_link      = anchor('admin/purchases/return_purchase/$1', '<i class="fa fa-angle-double-left"></i> ' . lang('return_purchase'));
+        $delete_link      = "<a href='#' class='po' title='<b>" . $this->lang->line('delete_purchase') . "</b>' data-content=\"<p>"
+        . lang('r_u_sure') . "</p><a class='btn btn-danger po-delete' href='" . admin_url('purchases/delete/$1') . "'>"
+        . lang('i_m_sure') . "</a> <button class='btn po-close'>" . lang('no') . "</button>\"  rel='popover'><i class=\"fas fa-trash-alt\"></i> "
+        . lang('delete_purchase') . '</a>';
+        $action = '<div class="text-center"><div class="btn-group text-left">'
+        . '<button type="button" class="btn btn-default btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">'
+        . lang('actions') . ' <span class="caret"></span></button>
+        <ul class="dropdown-menu pull-right" role="menu">
+            <li>' . $detail_link . '</li>
+            <li>' . $payments_link . '</li>
+            <li>' . $add_payment_link . '</li>
+            <li>' . $edit_link . '</li>
+            <li>' . $pdf_link . '</li>
+            <li>' . $email_link . '</li>
+            <li>' . $print_barcode . '</li>
+            <li>' . $return_link . '</li>
+            <li>' . $delete_link . '</li>
+        </ul>
+    </div></div>';
+        //$action = '<div class="text-center">' . $detail_link . ' ' . $edit_link . ' ' . $email_link . ' ' . $delete_link . '</div>';
+
+        $this->load->library('datatables');
+        if ($warehouse_id) {
+            $this->datatables
+                ->select("id, DATE_FORMAT(date, '%Y-%m-%d %T') as date, reference_no, supplier, status, grand_total, paid, (grand_total-paid) as balance, payment_status, attachment")
+                ->from('purchases')
+                ->where('warehouse_id', $warehouse_id) 
+                ->where('payment_status', 'paid')
+                ->or_where('payment_status', 'partial');
+        } else {
+            $this->datatables
+                ->select("id, DATE_FORMAT(date, '%Y-%m-%d %T') as date, reference_no, supplier, status, grand_total, paid, (grand_total-paid) as balance, payment_status, attachment")
+                ->from('purchases')
+                ->where('payment_status', 'paid')
+                ->or_where('payment_status', 'partial');
+        }
+        // $this->datatables->where('status !=', 'returned');
+        if (!$this->Customer && !$this->Supplier && !$this->Owner && !$this->Admin && !$this->session->userdata('view_right')) {
+            $this->datatables->where('created_by', $this->session->userdata('user_id'));
+        } elseif ($this->Supplier) {
+            $this->datatables->where('supplier_id', $this->session->userdata('user_id'));
+        }
+        $this->datatables->add_column('Actions', $action, 'id');
+        echo $this->datatables->generate();
+    }
+
+
+    public function getPurchases_new($warehouse_id = null)
+    {
+        $this->sma->checkPermissions('index');
+
+        if ((!$this->Owner || !$this->Admin) && !$warehouse_id) {
+            $user         = $this->site->getUser();
+            $warehouse_id = $user->warehouse_id;
+        }
+        $detail_link      = anchor('admin/purchases/view/$1', '<i class="far fa-file-alt"></i> ' . lang('purchase_details'));
+        $email_link       = anchor('admin/purchases/email/$1', '<i class="fa fa-envelope"></i> ' . lang('email_purchase'), 'data-toggle="modal" data-target="#myModal"');
+        $edit_link        = anchor('admin/purchases/received/$1', '<i class="fa fa-edit"></i> ' . lang('receipt_purchase'));
+        $pdf_link         = anchor('admin/purchases/pdf/$1', '<i class="fa fa-file-pdf-o"></i> ' . lang('download_pdf'));
+        $delete_link      = "<a href='#' class='po' title='<b>" . $this->lang->line('delete_purchase') . "</b>' data-content=\"<p>"
+        . lang('r_u_sure') . "</p><a class='btn btn-danger po-delete' href='" . admin_url('purchases/delete/$1') . "'>"
+        . lang('i_m_sure') . "</a> <button class='btn po-close'>" . lang('no') . "</button>\"  rel='popover'><i class=\"fas fa-trash-alt\"></i> "
+        . lang('delete_purchase') . '</a>';
+        $action = '<div class="text-center"><div class="btn-group text-left">'
+        . '<button type="button" class="btn btn-default btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">'
+        . lang('actions') . ' <span class="caret"></span></button>
+        <ul class="dropdown-menu pull-right" role="menu">
+            <li>' . $detail_link . '</li>
+            <li>' . $edit_link . '</li>
+            <li>' . $pdf_link . '</li>
+            <li>' . $email_link . '</li>
+            <li>' . $delete_link . '</li>
+        </ul>
+    </div></div>';
+        //$action = '<div class="text-center">' . $detail_link . ' ' . $edit_link . ' ' . $email_link . ' ' . $delete_link . '</div>';
+
+        $this->load->library('datatables');
+        if ($warehouse_id) {
+            $this->datatables
+                ->select("id, DATE_FORMAT(date, '%Y-%m-%d %T') as date, reference_no, supplier,DATE_FORMAT(due_date, '%Y-%m-%d') as due_date, status, grand_total, paid, (grand_total-paid) as balance, attachment")
+                ->from('purchases')
+                ->where('warehouse_id', $warehouse_id)
+                ->where('status', 'ordered');
+        } else {
+            $this->datatables
+                ->select("id, DATE_FORMAT(date, '%Y-%m-%d %T') as date, reference_no, supplier,DATE_FORMAT(due_date, '%Y-%m-%d') as due_date, status, grand_total, paid, (grand_total-paid) as balance, attachment")
+                ->from('purchases')
+                ->where('status', 'ordered');
+        }
+        // $this->datatables->where('status !=', 'returned');
+        if (!$this->Customer && !$this->Supplier && !$this->Owner && !$this->Admin && !$this->session->userdata('view_right')) {
+            $this->datatables->where('created_by', $this->session->userdata('user_id'));
+        } elseif ($this->Supplier) {
+            $this->datatables->where('supplier_id', $this->session->userdata('user_id'));
+        }
+        $this->datatables->add_column('Actions', $action, 'id');
+        echo $this->datatables->generate();
+    }
+
+    
 
     public function getSupplierCost($supplier_id, $product)
     {
@@ -1265,7 +1656,7 @@ class Purchases extends MY_Controller
 
         $bc   = [['link' => base_url(), 'page' => lang('home')], ['link' => '#', 'page' => lang('purchases')]];
         $meta = ['page_title' => lang('purchases'), 'bc' => $bc];
-        $this->page_construct('purchases/index', $meta, $this->data);
+        $this->page_construct('purchases/dashboard_purchases', $meta, $this->data);
     }
 
     /* ----------------------------------------------------------------------------- */

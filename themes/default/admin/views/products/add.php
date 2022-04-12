@@ -970,7 +970,7 @@ if (!empty($variants)) {
                     });
                 },
                 ajax: {
-                    url: site.base_url + "suppliers/suggestions",
+                    url: site.base_url + "suppliers/suggestions_whub",
                     dataType: 'json',
                     quietMillis: 15,
                     data: function (term, page) {

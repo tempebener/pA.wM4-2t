@@ -52,10 +52,10 @@
                                 </td>
                             </tr>
                         <?php
-    }
-} else {
-    echo "<tr><td colspan='5'>" . lang('no_data_available') . '</td></tr>';
-} ?>
+                            }
+                        } else {
+                            echo "<tr><td colspan='5'>" . lang('no_data_available') . '</td></tr>';
+                        } ?>
                     </tbody>
                 </table>
             </div>

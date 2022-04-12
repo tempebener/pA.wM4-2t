@@ -41,8 +41,7 @@
                                 }
                             } ?>
                             <?= lang('status'); ?>: <?= lang($inv->status); ?><br>
-                            <!-- <?= lang('payment_status'); ?>: <?= lang($inv->payment_status); ?> -->
-                            <?= lang('payment_term'); ?>: H + <?= lang($inv->payment_term); ?>
+                            <?= lang('payment_status'); ?>: <?= lang($inv->payment_status); ?>
                         </p>
                     </div>
                     <div class="col-xs-6 pull-right text-right order_barcodes">
