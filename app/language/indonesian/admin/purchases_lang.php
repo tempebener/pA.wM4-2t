@@ -67,7 +67,11 @@ $lang['paid_by']                             = 'Dibayar oleh';
 $lang['payment_reference']                   = 'Refrensi Pembayaran';
 $lang['view_purchase_details']               = 'View Detail Pembelian ';
 $lang['purchase_no']                         = 'Nomor Pembelian';
+<<<<<<< HEAD
 $lang['balance']                             = 'Saldo';
+=======
+$lang['balance']                             = 'Sisa Bayar';
+>>>>>>> 61d47fac7efdee6fb411f60e67f0a02e9746c432
 $lang['product_option']                      = 'Opsi Produk';
 $lang['payment_sent']                        = 'Pembayaran Dikirim';
 $lang['payment_note']                        = 'Catatan Pembayaran';
