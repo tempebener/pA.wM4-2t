@@ -44,13 +44,17 @@
 }*/
 
 /*Sidebar*/
-/*.nav.main-menu > li > a, .nav.main-menu > li > ul > li > a, .nav.main-menu > li > ul > li > ul > li > a, .nav.main-menu > li > ul > li > ul > li > ul > li > a {
+.nav.main-menu > li > a, .nav.main-menu > li > ul > li > a, .nav.main-menu > li > ul > li > ul > li > a, .nav.main-menu > li > ul > li > ul > li > ul > li > a {
   background: unset;
+}
+.nav.main-menu > li > a > i, .nav.main-menu > li > ul > li > a > i {
+  margin-right: unset;
 }
 #sidebar-left {
   background-color: #0c213a;
 }
 .lt td.sidebar-con {
+  width: 0px;
   background-color: #0c213a;
   padding: 20px 10px 0;
 }
@@ -95,7 +99,7 @@ a#main-menu-act i {
 }
 .header-nav a.btn:hover .user{
   color: white !important;
-}*/
+}
 
 /*Submenu Sidebar*/
 /*.nav.main-menu > li > ul > li.active > a, .nav.main-menu > li > ul > li > ul > li.active > a, .nav.main-menu > li > ul > li > ul > li > ul > li.active > a {
@@ -133,11 +137,16 @@ a.navbar-brand span {
   text-overflow: clip;
 }*/
 
+/*Body*/
+body {
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+}
+
 /*POS*/
 .btn-prni {
   font-size: 11px !important;
 }
-
 
 /*Collapse Sidebar*/
 #content.sidebar-minified {
@@ -158,6 +167,13 @@ a.navbar-brand span {
 .table > thead:first-child > tr:first-child > th, .table > thead:first-child > tr:first-child > td, .table-striped thead tr.primary:nth-child(2n+1) th {
   /*background-color: #0073cf;*/
   background-color: #007bff;
+}
+.table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
+  /*padding: 0.4em 1em;*/
+  font-size: 10pt;
+}
+.dropdown-menu {
+  font-size: 13px;
 }
 
 /*Text*/
