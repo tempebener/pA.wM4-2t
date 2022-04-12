@@ -92,7 +92,7 @@
                             <img alt="" src="<?= $this->session->userdata('avatar') ? base_url() . 'assets/uploads/avatars/thumbs/' . $this->session->userdata('avatar') : base_url('assets/images/' . $this->session->userdata('gender') . '.png'); ?>" class="mini_avatar img-rounded">
 
                             <div class="user">
-                                <span><?= lang('welcome') ?> <?= $this->session->userdata('username'); ?></span>
+                                <span><?= $this->session->userdata('username'); ?></span>
                             </div>
                         </a>
                         <ul class="dropdown-menu pull-right">
