@@ -2323,6 +2323,12 @@ class Reports extends MY_Controller
                 $si .= " {$this->db->dbprefix('sale_items')}.serial_no LIKe '%{$serial}%' ";
             }
             $si .= " GROUP BY {$this->db->dbprefix('sale_items')}.sale_id ) FSI";
+            $this->load->library('datatables');
+            $this->datatables
+                ->select("DATE_FORMAT(date, '%Y-%m-%d %T') as date, reference_no, biller, customer, FSI.item_nane as iname, grand_total, paid, (grand_total-paid) as balance, payment_status, {$this->db->dbprefix('sales')}.id as id", false)
+                ->from('sales')
+                ->join($si, 'FSI.sale_id=sales.id', 'left')
+                ->join('warehouses', 'warehouses.id=sales.warehouse_id', 'left');
             
             // ->group_by('sales.id');
 
@@ -2478,26 +2484,26 @@ class Reports extends MY_Controller
             $this->session->set_flashdata('error', lang('nothing_found'));
             redirect($_SERVER['HTTP_REFERER']);
         } else {
-            $si = "( SELECT sale_id, product_id, serial_no, GROUP_CONCAT(CONCAT({$this->db->dbprefix('sale_items')}.product_name, '__', {$this->db->dbprefix('sale_items')}.quantity) SEPARATOR '___') as item_nane from {$this->db->dbprefix('sale_items')} ";
-            if ($product || $serial) {
-                $s .= ' WHERE ';
-            }
-            if ($product) {
-                $s .= " {$this->db->dbprefix('sale_items')}.product_id = {$product} ";
-            }
-            if ($product && $serial) {
-                $s .= ' AND ';
-            }
-            if ($serial) {
-                $s .= " {$this->db->dbprefix('sale_items')}.serial_no LIKe '%{$serial}%' ";
-            }
-            $s .= " GROUP BY {$this->db->dbprefix('sale_items')}.sale_id ) FS";
+            // $si = "( SELECT sale_id, product_id, serial_no, GROUP_CONCAT(CONCAT({$this->db->dbprefix('sale_items')}.product_name, '__', {$this->db->dbprefix('sale_items')}.quantity) SEPARATOR '___') as item_nane from {$this->db->dbprefix('sale_items')} ";
+            // if ($product || $serial) {
+            //     $si .= ' WHERE ';
+            // }
+            // if ($product) {
+            //     $si .= " {$this->db->dbprefix('sale_items')}.product_id = {$product} ";
+            // }
+            // if ($product && $serial) {
+            //     $si .= ' AND ';
+            // }
+            // if ($serial) {
+            //     $si .= " {$this->db->dbprefix('sale_items')}.serial_no LIKe '%{$serial}%' ";
+            // }
+            // $si .= " GROUP BY {$this->db->dbprefix('sale_items')}.sale_id ) FSI";
             $this->load->library('datatables');
             $this->datatables
-                ->select("DATE_FORMAT(FS.date, '%Y-%m-%d %T') as date, FS.reference_no, FS.biller, FS.customer, GROUP_CONCAT(CONCAT('product_name, ' (', quantity ')') SEPARATOR '\n') as iname, subtotal, FS.paid, (FS.grand_total-FS.paid) as balance, FS.payment_status, FS.id as s_id", false)
+                ->select("DATE_FORMAT({$this->db->dbprefix('sales')}.date, '%Y-%m-%d %T') as date, {$this->db->dbprefix('sales')}.reference_no, {$this->db->dbprefix('sales')}.biller, {$this->db->dbprefix('sales')}.customer, GROUP_CONCAT(CONCAT('product_name, ' (', quantity ')') SEPARATOR '\n') as iname, {$this->db->dbprefix('sales')}.grand_total, {$this->db->dbprefix('sales')}.paid, ({$this->db->dbprefix('sales')}.grand_total-{$this->db->dbprefix('sales')}.paid) as balance, {$this->db->dbprefix('sales')}.payment_status, {$this->db->dbprefix('sales')}.id as id", false)
                 ->from('sale_items')
+                ->join('sales', 'sale_items.sale_id=sales.id', 'left')
                 // ->join($si, 'FSI.sale_id=sales.id', 'left')
-                ->join($s, 'sale_items.sale_id=FS.id', 'left')
                 ->join('warehouses', 'warehouses.id=sales.warehouse_id', 'left');
             // ->group_by('sales.id');
 
